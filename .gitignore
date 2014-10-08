@@ -1,0 +1,12 @@
+public
+app/config/app.php
+app/config/database.php
+app/config/developement
+app/config/testing
+app/views/site
+app/views/index.blade.php
+app/views/_frontend
+app/assets
+nbproject
+gulpfile.js
+node_modules
