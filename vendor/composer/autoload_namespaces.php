@@ -34,7 +34,6 @@ return array(
     'Math' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Lavary\\Menu\\' => array($vendorDir . '/lavary/laravel-menu/src'),
     'Jeremeamia\\SuperClosure' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
-    'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src'),
     'Illuminate' => array($vendorDir . '/laravel/framework/src'),
     'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'DaveJamesMiller\\Breadcrumbs' => array($vendorDir . '/davejamesmiller/laravel-breadcrumbs/src'),

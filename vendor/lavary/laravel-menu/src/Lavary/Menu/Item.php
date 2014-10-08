@@ -100,18 +100,11 @@ class Item {
 
 		
 		$this->link = $path ? new Link($path) : null;
-
-		// If the item's URL is the same as request URI, 
-		// activate the item and it's parent nodes too.
-		if( true === \Config::get('laravel-menu::options.auto_activate') ) {
-
-			if( \Request::url() == $this->url() ) {
-
-				$this->activate();
-
-			}
+		
+		// Activate the item if items's url matches the request uri
+		if( true === $this->builder->conf('auto_activate') ) {
+			$this->checkActivationStatus();
 		} 
-
 	}
 
 	/**
@@ -272,13 +265,46 @@ class Item {
 	 * Decide if the item should be active
 	 *
 	 */
+	public function checkActivationStatus(){
+		
+		if( $this->builder->conf['restful'] == true ) {
+
+			$path  = ltrim(parse_url($this->url(), PHP_URL_PATH), '/');
+			$rpath = \Request::path();
+			
+
+			if($this->builder->conf['rest_base'] ) {
+				
+				$base = ( is_array($this->builder->conf['rest_base']) ) ? implode('|', $this->builder->conf['rest_base']) : $this->builder->conf['rest_base'];
+
+				list($path, $rpath) = preg_replace('@^('. $base . ')/@', '' , [$path, $rpath], 1);
+			}
+
+			if( preg_match("@^{$path}(/.+)?\z@", $rpath) ) {
+				
+				$this->activate();
+			}
+		} else {
+			
+			if( $this->url() == \Request::url() ) {
+				
+				$this->activate();
+			}
+
+		}
+	}
+
+	/**
+	 * Activat the item
+	 *
+	 */
 	public function activate( \Lavary\Menu\Item $item = null ){
 	
 		$item = is_null($item) ? $this : $item;
 		
 		
 		// Check to see which element should have class 'active' set.
-		if( \Config::get('laravel-menu::options.active_element') == 'item' ) {
+		if( $this->builder->conf('active_element') == 'item' ) {
 			
 			$item->active();
 
@@ -287,11 +313,13 @@ class Item {
 			$item->link->active();
 		}	
 		
-		if( true === \Config::get('laravel-menu::options.activate_parents') ){
-			// Moving up through the parent nodes and activate them too.
+		// If parent activation is enabled:
+		if( true === $this->builder->conf('activate_parents') ){
+			// Moving up through the parent nodes, activating them as well.
 			if( $item->parent ) {
-			
+				
 				$this->activate( $this->builder->whereId( $item->parent )->first() );
+
 			}
 		}
 	}
@@ -301,8 +329,18 @@ class Item {
 	 *
 	 * @return Lavary\Menu\Item
 	 */
-	public function active(){
+	public function active($pattern = null){
 	
+		if(!is_null($pattern)) {
+
+			$pattern = ltrim(preg_replace('/\/\*/', '(/.*)?', $pattern), '/');
+			if( preg_match("@^{$pattern}\z@", \Request::path()) ){
+				$this->activate();
+			}	
+
+			return $this;
+		}
+
 		$this->attributes['class'] = Builder::formatGroupClass(array('class' => 'active'), $this->attributes);
 		
 		return $this;
