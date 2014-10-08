@@ -8,5 +8,6 @@ app/views/index.blade.php
 app/views/_frontend
 app/assets
 nbproject
+.idea
 gulpfile.js
 node_modules

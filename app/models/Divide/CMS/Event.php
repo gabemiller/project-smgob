@@ -6,7 +6,7 @@ use Str;
 
 class Event extends \Eloquent {
 
-    use \Conner\Tagging\Taggable;
+    use \Conner\Tagging\TaggableTrait;
 
     //protected $fillable = [];
     protected $table = 'events';
