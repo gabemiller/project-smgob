@@ -4,20 +4,10 @@
  * -----------------------------------------------------------------------------
  * Site
  * -----------------------------------------------------------------------------
- * 
- * A cms-hez tarozó route-ok. 
- * 
+ *
+ * A cms-hez tarozó route-ok.
+ *
  */
-/* Route::get('/',function(){   
-  return 'Cover page';
-  }); */
-
-if (Config::get('app.debug')) {
-    Route::get('/phpinfo', function() {
-        //echo phpinfo();
-        echo App::environment();
-    });
-}
 
 Route::get('/', ['uses' => 'Site\HomeController@index', 'as' => 'fooldal']);
 
@@ -44,23 +34,33 @@ Route::post('documentumok', ['uses' => 'Site\DocumentController@index', 'as' => 
  * -----------------------------------------------------------------------------
  * Site menu
  * -----------------------------------------------------------------------------
- * 
- * A cms-hez tarozó menu-k. 
- * 
+ *
+ * A cms-hez tarozó menu-k.
+ *
  */
 if (!Request::is('admin') && !Request::is('admin/*')) {
 
-    Menu::make('mainMenu', function($menu) {
+    Menu::make('mainMenu', function ($menu) {
 
         $menu->add('Főoldal', array('route' => 'fooldal'));
 
-        $menu->add('Események', array('route' => 'esemenyek.index'));
+        //$menu->add('Események', array('route' => 'esemenyek.index'));
 
-        $menu->add('Galériák', array('route' => 'galeriak.index'));
-        
-        $menu->add('Dokumentumok', array('route' => 'dokumentumok.index'));
+        //$menu->add('Galériák', array('route' => 'galeriak.index'));
+
+        //$menu->add('Dokumentumok', array('route' => 'dokumentumok.index'));
 
         try {
+            $pages = \Divide\CMS\Page::where('parent', '=', 0)->get();
+
+            foreach ($pages as $page) {
+                $menu->add($page->menu, array('route' => 'fooldal'));
+            }
+        } catch (\Exception $e) {
+
+        }
+
+        /*try {
             \Divide\CMS\Page::getPagesForMenu($menu, 0);
 
             foreach ($menu->all() as $item) {
@@ -70,7 +70,7 @@ if (!Request::is('admin') && !Request::is('admin/*')) {
             }
         } catch (\Exception $e) {
             
-        }
+        }*/
     });
 }
 
@@ -79,11 +79,11 @@ if (!Request::is('admin') && !Request::is('admin/*')) {
  * -----------------------------------------------------------------------------
  * Admin
  * -----------------------------------------------------------------------------
- * 
- * Az adminisztrációs felülethez tarozó route-ok. 
- * 
+ *
+ * Az adminisztrációs felülethez tarozó route-ok.
+ *
  */
-Route::group(array('prefix' => 'admin', 'namespace' => 'Admin'), function() {
+Route::group(array('prefix' => 'admin', 'namespace' => 'Admin'), function () {
 
     Route::get('bejelentkezes', ['uses' => 'UsersController@getLogin', 'as' => 'admin.bejelentkezes', 'before' => 'userLoggedIn']);
 
@@ -92,7 +92,7 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin'), function() {
     Route::get('kijelentkezes', ['uses' => 'UsersController@getLogout', 'as' => 'admin.kijelentkezes']);
 });
 
-Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'userNotLoggedIn|inGroup:Admin'), function() {
+Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'userNotLoggedIn|inGroup:Admin'), function () {
 
     /**
      * Általános beállításokhoz tartozó route-ok.
@@ -104,9 +104,9 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'use
     Route::resource('hir', 'ArticleController');
 
     Route::resource('esemeny', 'EventController');
-    
+
     Route::resource('dokumentum', 'DocumentController');
-    
+
     Route::resource('dokumentum-kategoria', 'DocumentCategoryController');
 
     Route::resource('galeria', 'GalleryController');
@@ -120,7 +120,7 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'use
     /**
      * Felhasználók kezeléséhez tartozó route-ok.
      */
-    Route::group(['prefix' => 'felhasznalok'], function() {
+    Route::group(['prefix' => 'felhasznalok'], function () {
         Route::resource('felhasznalo', 'UsersController');
 
         Route::post('felhasznalo/{id}/change', ['uses' => 'UsersController@postProfile', 'as' => 'admin.felhasznalok.felhasznalo.change']);

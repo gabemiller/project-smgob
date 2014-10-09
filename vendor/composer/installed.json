@@ -2096,18 +2096,113 @@
         ]
     },
     {
+        "name": "philf/setting",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Phil-F/Setting.git",
+            "reference": "52e6336d8c511cd8027e90a461019df9a127ffd9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Phil-F/Setting/zipball/52e6336d8c511cd8027e90a461019df9a127ffd9",
+            "reference": "52e6336d8c511cd8027e90a461019df9a127ffd9",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~4",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2014-07-20 10:36:44",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Philf\\Setting": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Phil Foulston",
+                "email": "info@weztec.com"
+            }
+        ],
+        "description": "Persistent configuration settings for Laravel - Create, Read, Update and Delete settings stored in files using JSON",
+        "keywords": [
+            "config",
+            "laravel"
+        ]
+    },
+    {
+        "name": "jenssegers/date",
+        "version": "v2.0.7",
+        "version_normalized": "2.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jenssegers/laravel-date.git",
+            "reference": "02a5e4e922b548fc16aa209130cbf3c7a8bc1455"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jenssegers/laravel-date/zipball/02a5e4e922b548fc16aa209130cbf3c7a8bc1455",
+            "reference": "02a5e4e922b548fc16aa209130cbf3c7a8bc1455",
+            "shasum": ""
+        },
+        "require": {
+            "nesbot/carbon": "*",
+            "php": ">=5.3.0",
+            "symfony/translation": "*"
+        },
+        "require-dev": {
+            "satooshi/php-coveralls": "*"
+        },
+        "time": "2014-08-14 12:56:17",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Jenssegers\\Date": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jens Segers",
+                "homepage": "http://jenssegers.be"
+            }
+        ],
+        "description": "A date library to help you work with dates",
+        "keywords": [
+            "date",
+            "datetime",
+            "laravel",
+            "time"
+        ]
+    },
+    {
         "name": "lavary/laravel-menu",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/lavary/laravel-menu.git",
-            "reference": "3c804ecf67550bfc1c364a74dc2d67b8cc780831"
+            "reference": "bba077a2788299117a5fe735bda871183c44b869"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/3c804ecf67550bfc1c364a74dc2d67b8cc780831",
-            "reference": "3c804ecf67550bfc1c364a74dc2d67b8cc780831",
+            "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/bba077a2788299117a5fe735bda871183c44b869",
+            "reference": "bba077a2788299117a5fe735bda871183c44b869",
             "shasum": ""
         },
         "require": {
@@ -2115,7 +2210,7 @@
             "illuminate/view": ">=4.2",
             "php": ">=5.3.0"
         },
-        "time": "2014-10-06 15:31:00",
+        "time": "2014-10-09 09:06:48",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
