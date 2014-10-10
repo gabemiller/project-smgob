@@ -3,34 +3,42 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateDocumentTable extends Migration {
+class CreateDocumentTable extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('document', function(Blueprint $table)
-		{
-			$table->increments('id');
-                        $table->string('name');
-                        $table->text('description');
-                        $table->string('path');
-			$table->timestamps();
-		});
-	}
+    /**
+     * Létrehozza a document táblát.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('document', function (Blueprint $table) {
+            // Azonosító
+            $table->increments('id');
+            // Dokumentum neve
+            $table->string('name');
+            // Dokumentum leírása
+            $table->text('description');
+            // Dokumentum útvonala
+            $table->string('path');
+            // Létrehozva
+            // Frissítve
+            $table->timestamps();
+            // Unique
+            $table->unique(['name', 'path']);
+        });
+    }
 
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('document');
-	}
+    /**
+     * Eldobja a document táblát.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('document');
+    }
 
 }

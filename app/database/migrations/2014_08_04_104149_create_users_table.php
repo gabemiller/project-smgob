@@ -5,19 +5,21 @@ use Illuminate\Database\Migrations\Migration;
 class CreateUsersTable extends Migration {
 
     /**
-     * Run the migrations.
+     * Hozzáad két oszlopot a users táblához.
      *
      * @return void
      */
     public function up() {
         Schema::table('users', function($table) {
+            // Telefonszám
             $table->string('phone');
+            // Törölhető-e?
             $table->boolean('deletable')->default(true);
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Eldob két oszlopot a users táblából.
      *
      * @return void
      */
