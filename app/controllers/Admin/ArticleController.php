@@ -54,7 +54,7 @@ class ArticleController extends \BaseController {
             $rules = array(
                 'title' => 'required|unique:articles',
                 'content' => 'required',
-                'author' => 'required',
+                'author_id' => 'required',
             );
 
             $validation = Validator::make(Input::all(), $rules);
@@ -67,9 +67,9 @@ class ArticleController extends \BaseController {
 
 
             $article->title = Input::get('title');
-            $article->author_id = Input::get('author');
+            $article->author_id = Input::get('author_id');
             $article->content = Input::get('content');
-            $article->shows = Input::get('shows') ? true : false;
+            $article->published = Input::get('published') ? true : false;
             $article->gallery_id = is_numeric(Input::get('gallery')) ? Input::get('gallery') : 0;
 
 
@@ -131,7 +131,7 @@ class ArticleController extends \BaseController {
             $rules = array(
                 'title' => 'required|unique:articles,title,' . $id,
                 'content' => 'required',
-                'author' => 'required',
+                'author_id' => 'required',
             );
 
             $validation = Validator::make(Input::all(), $rules);
@@ -144,9 +144,9 @@ class ArticleController extends \BaseController {
 
 
             $article->title = Input::get('title');
-            $article->author_id = Input::get('author');
+            $article->author_id = Input::get('author_id');
             $article->content = Input::get('content');
-            $article->shows = Input::get('shows') ? true : false;
+            $article->published = Input::get('published') ? true : false;
             $article->gallery_id = is_numeric(Input::get('gallery')) ? Input::get('gallery') : 0;
             $article->retag(explode(',', Input::get('tags')));
 

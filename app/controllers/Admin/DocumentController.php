@@ -26,7 +26,7 @@ class DocumentController extends \BaseController {
     public function index() {
         View::share('title', 'Dokumentumok');
 
-        $this->layout->content = View::make('admin.document.index')->with('documents', Document::all(['id', 'name','path', 'created_at']));
+        $this->layout->content = View::make('admin.document.index')->with('documents', Document::all(['id', 'name','path', 'created_at','updated_at']));
     }
 
     /**
