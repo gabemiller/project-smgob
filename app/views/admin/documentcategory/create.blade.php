@@ -23,9 +23,9 @@
                 <div class="box-body">
                     {{Form::open(array('url' => URL::route('admin.dokumentum-kategoria.store',array()),'class'=>'form-horizontal','method'=>'POST'))}}
                     <div class="form-group">
-                        {{Form::label('parent', 'Szülő kategória',array('class'=>'col-lg-2 control-label'))}}
+                        {{Form::label('parent_id', 'Szülő kategória',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
-                            {{Form::selection('parent', $categories,array('class'=>'form-control'));}} 
+                            {{Form::selection('parent_id', $categories,array('class'=>'form-control'));}}
                         </div>
                     </div>
                     <div class="form-group">

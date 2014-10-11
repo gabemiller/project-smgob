@@ -54,6 +54,12 @@
                             {{Form::selection('gallery', $galleries,array('class'=>'form-control'),$page->getGalleryId());}} 
                         </div>
                     </div>
+                    <div class="form-group">
+                        {{Form::label('published', 'Megjelenjen a főoldalon?',array('class'=>'col-lg-2 control-label'))}}
+                        <div class="col-lg-9">
+                            {{Form::checkbox('published', 'true',$page->published,array('class'=>'btn-switch'))}}
+                        </div>
+                    </div>
                 </div>
             </div>
             {{Form::close()}}

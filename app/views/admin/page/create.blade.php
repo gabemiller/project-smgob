@@ -25,18 +25,6 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        {{Form::label('parent', 'Szülő menüpont',array('class'=>'col-lg-2 control-label'))}}
-                        <div class="col-lg-2">
-                            {{Form::selection('parent', $pages,array('class'=>'form-control'));}} 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{Form::label('menu', 'Menüpont',array('class'=>'col-lg-2 control-label'))}}
-                        <div class="col-lg-9">
-                            {{Form::input('text','menu','',array('class'=>'form-control','Placeholder'=>'Menüpont'))}}
-                        </div>
-                    </div>
-                    <div class="form-group">
                         {{Form::label('title', 'Cím',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
                             {{Form::input('text','title','',array('class'=>'form-control','Placeholder'=>'Cím'))}}
@@ -53,6 +41,12 @@
                         <div class="col-lg-2">
                             {{Form::selection('gallery', $galleries,array('class'=>'form-control'));}} 
                         </div>
+                    </div>
+                    <div class="form-group">
+                          {{Form::label('published', 'Megjelenjen a főoldalon?',array('class'=>'col-lg-2 control-label'))}}
+                          <div class="col-lg-9">
+                            {{Form::checkbox('published', 'true',false,array('class'=>'btn-switch'))}}
+                          </div>
                     </div>
                 </div>
             </div>

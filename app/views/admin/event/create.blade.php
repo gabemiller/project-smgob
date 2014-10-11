@@ -33,13 +33,13 @@
                         {{Form::label('date', 'Időpont',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-3">
                             <div class="input-group">
-                                {{Form::input('text','start','',array('id'=>'dateTimeStart','class'=>'form-control','placeholder'=>date('Y.m.d H:i')))}}
+                                {{Form::input('text','start_at','',array('id'=>'dateTimeStart','class'=>'form-control','placeholder'=>date('Y.m.d H:i')))}}
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="input-group">
-                                {{Form::input('text','end','',array('id'=>'dateTimeEnd','class'=>'form-control','placeholder'=>date('Y.m.d H:i')))}}
+                                {{Form::input('text','end_at','',array('id'=>'dateTimeEnd','class'=>'form-control','placeholder'=>date('Y.m.d H:i')))}}
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
@@ -57,9 +57,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{Form::label('shows', 'Megjelenjen az események között?',array('class'=>'col-lg-2 control-label'))}}
+                        {{Form::label('published', 'Megjelenjen az események között?',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
-                            {{Form::checkbox('shows', 'true')}}
+                            {{Form::checkbox('published', 'true',false,array('class'=>'btn-switch'))}}
                         </div>
                     </div>
                     <div class="form-group">

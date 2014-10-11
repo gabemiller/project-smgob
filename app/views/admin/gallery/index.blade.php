@@ -26,7 +26,7 @@
                             <thead>
                                 <tr>
                                     <th class="table-col-xs sorter-false filter-false"><input type="checkbox" id="checkAll"></th>
-                                    <th class="table-col-xs">Id</th>
+                                    <th class="table-col-xs">Az</th>
                                     <th>Cím</th>
                                     <th>Dátum</th>
                                     <th class="table-col-lg sorter-false filter-false">Beállítások</th>

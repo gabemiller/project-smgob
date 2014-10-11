@@ -30,10 +30,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{Form::label('author', 'Szerző',array('class'=>'col-lg-2 control-label'))}}
+                        {{Form::label('author_id', 'Szerző',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
                             {{Form::input('text','',$article->getAuthorName(),array('class'=>'form-control','disabled'=>'disabled'))}}
-                            {{Form::input('hidden','author',$article->author->id,array('class'=>'form-control'))}}
+                            {{Form::input('hidden','author_id',$article->author->id,array('class'=>'form-control'))}}
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,9 +49,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{Form::label('shows', 'Megjelenjen a hírek között?',array('class'=>'col-lg-2 control-label'))}}
+                        {{Form::label('published', 'Megjelenjen a hírek között?',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
-                            {{Form::checkbox('shows', 'true',$article->shows)}}
+                            {{Form::checkbox('published', 'true',$article->published,array('class'=>'btn-switch'))}}
                         </div>
                     </div>
                     <div class="form-group">
