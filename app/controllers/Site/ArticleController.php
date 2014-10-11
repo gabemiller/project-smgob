@@ -13,7 +13,7 @@ class ArticleController extends \BaseController {
 
     /**
      * Display the specified resource.
-     * GET /site\article/{id}
+     * GET /site/article/{id}
      *
      * @param  int  $id
      * @return Response

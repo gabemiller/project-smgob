@@ -18,6 +18,8 @@ class CreateGalleryTable extends Migration {
             $table->string('name');
             // Galéria leírása
             $table->text('description');
+            // Publikálva van-e?
+            $table->boolean('published');
             // Létrehozva, frissítve
             $table->timestamps();
             // Unique

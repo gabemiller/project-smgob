@@ -21,8 +21,8 @@ class EventController extends \BaseController {
     public function index() {
         View::share('title', 'Események');
 
-          $events = Event::where('shows', '=', true)->orderBy('start', 'DESC')->select(['id', 'title', 'start', 'end', 'content'])->paginate(10);
-        $events = Event::whereRaw('shows = ? ORDER BY start DESC', array(true))->paginate(10);
+        //$events = Event::where('shows', '=', true)->orderBy('start', 'DESC')->select(['id', 'title', 'start', 'end', 'content'])->paginate(10);
+        $events = Event::whereRaw('published = ? ORDER BY start_at DESC', array(true))->paginate(10);
 
         $this->layout->content = View::make('site.event.index')->with('events', $events);
     }

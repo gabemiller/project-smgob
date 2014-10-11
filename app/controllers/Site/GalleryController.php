@@ -17,8 +17,8 @@ class GalleryController extends \BaseController {
      * @return Response
      */
     public function index() {
+
         View::share('title', 'Galériák');
-        
 
         $gallery = Gallery::orderBy('updated_at', 'desc')->select(['id','name','description','updated_at'])->paginate(10);
 
@@ -33,8 +33,8 @@ class GalleryController extends \BaseController {
      * @return Response
      */
     public function show($id) {
+
         View::share('title', 'Galériák');
-        
 
         $this->layout->content = View::make('site.gallery.show')->with('gallery', Gallery::find($id))->with('url',Request::url());
     }
