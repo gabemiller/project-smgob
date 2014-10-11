@@ -35,9 +35,11 @@
                     <div class="table-responsive">
                         <table class="table-sortable table-upload">
                             <thead>
-                            <th class="table-col-xs sorter-false filter-false">Kép</th>
-                            <th>Név</th>
-                            <th class="table-col-xs sorter-false filter-false">Törlés</th>
+                            <tr>
+                                <th class="table-col-xs sorter-false filter-false">Kép</th>
+                                <th>Név</th>
+                                <th class="table-col-xs sorter-false filter-false">Törlés</th>
+                            </tr>
                             </thead>
                             <tbody>
                                 @if(sizeof($gallery->pictures->toArray()) == 0)

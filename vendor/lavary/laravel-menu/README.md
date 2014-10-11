@@ -7,6 +7,51 @@
 
 A quick way to create menus in [Laravel 4.x](http://laravel.com/)
 
+##Documentation
+
+* [Installation](#installation)
+* [Basic Usage](#basic-usage)
+* [Routing](#routing)
+	- [Named Routes](#named-routs)
+	- [Controller Actions](#controller-actions)
+	- [HTTPS](#https)
+* [Sub-items](#sub-items)
+* [Referring to Items](#referring-to-items)
+	- [Get Item by Title](#get-item-by-title)
+	- [Get Item by Id](#get-item-by-id)
+	- [Get All Items](#get-all-items)
+	- [Get the First Item](#get-the-first-item)
+	- [Get the Last Item](#get-the-last-item)
+	- [Get Sub-items of the Item](#get-sub-items-of-the-item)
+	- [Magic Where Methods](#magic-where-methods)
+* [Referring to Menu Objects](#referring-to-menu-instances)
+* [HTML Attributes](#html-attributes)
+* [Maniuplating Links](#maniuplating-links)
+	- [Link's Href Property](#links-href-property)
+* [Active Item](#active-item)
+	- [RESTful URLs](#restful-urls)
+	- [URL Wildcards](#url-wildcards)
+* [Inserting a Separator](#inserting-a-separator)
+* [Append and Prepend](#append-and-prepend)
+* [Raw Items](#raw-items)
+* [Menu Groups](#menu-groups)
+* [URL Prefixing](#url-prefixing)
+* [Nested Groups](#nested-groups)
+* [Meta Data](#meta-data)
+* [Filtering the Items](#filtering-the-items)
+* [Sorting the Items](#sorting-the-items)
+* [Rendering Methods](#rendering-methods)
+	- [Menu as Unordered List](#menu-as-unordered-list)
+	- [Menu as Ordered List](#menu-as-ordered-list)
+	- [Menu as Div](#menu-as-div)
+	- [Menu as Bootstrap 3 Navbar](#menu-as-bootstrap-3-navbar)
+* [Advanced Usage](#advanced-usage)
+* [Configuration](#configuration)
+* [Control Structures for Blade](#control-structures-for-blade)
+	- [@lm-attrs](#lm-attrs)
+* [If You Need Help](#if-you-need-help)
+* [License](#license)
+
 
 ## Installation
 
@@ -286,7 +331,7 @@ It is possible to add sub items directly using `parent` attribute:
 
 You can access defined items throughout your code using the methods described below.
 
-**Get Item by Title**
+#### Get Item by Title
 
  along with item's title in *camel case*:
 
@@ -330,7 +375,7 @@ As an example, let's insert a divider after `About us` item after we've defined 
 ?>
 ```
 
-**Get Item By Id**
+#### Get Item By Id
 
 You can also get an item by Id if needed:
 
@@ -342,7 +387,7 @@ You can also get an item by Id if needed:
 ?>
 ```
 
-**Get All Items**
+#### Get All Items
 
 ```php
 <?php
@@ -356,7 +401,7 @@ You can also get an item by Id if needed:
 ```
 `all()` returns a *Laravel Collection*.
 
-**Get the First Item**
+#### Get the First Item
 
 ```php
 <?php
@@ -369,7 +414,7 @@ You can also get an item by Id if needed:
 ?>
 ```
 
-**Get the Last Item**
+#### Get the Last Item
 
 ```php
 <?php
@@ -382,7 +427,7 @@ You can also get an item by Id if needed:
 ?>
 ```
 
-**Get Sub-Items of the Item**
+#### Get Sub-Items of the Item
 
 First of all you need to get the item using the methods described above then call `children()` on it.
 
@@ -421,9 +466,18 @@ To check if an item has any children or not, you can use `hasChildren()`
 ?>
 ```
 
+To get all descendants of an item you may use `all`:
+
+```php
+<?php
+// ...
+$aboutSubs = $menu->about->all();
+// ...
+
+```
 
 
-**Magic Where Methods**
+#### Magic Where Methods
 
 You can also search the items collection by magic where methods.
 These methods are consisted of a `where` concatenated with a property (object property or even meta data)
@@ -456,6 +510,15 @@ Or to get item's with a specific meta data:
 ```
 
 This method returns a *Laravel collection*.
+
+If you need to fetch descendants of the matched items as well, Just set the second argument as true.
+
+```php
+<?php
+$reds = $menu->whereColor('red', true);
+```
+
+This will give all items with color red and their decsendants.
 
 
 ## Referring to Menu Instances
@@ -560,6 +623,22 @@ You can also pass an associative array of attributes if you need to add a group 
 ?>
 ```
 
+You can use `attr` on a collection, if you need to target a group of items:
+
+```php
+<?php
+  // ...
+  $menu->add('About', 'about');
+  
+  $menu->about->add('Who we are', 'about/whoweare');
+  $menu->about->add('What we do', 'about/whatwedo');
+  
+  // add a class to children of About
+  $menu->about->children()->attr('class', 'about-item');
+  
+  // ...
+```
+
 ## Maniuplating Links
 
 All the HTML attributes will go to the wrapping tags(li, div, etc); You might encounter situations when you need to add some HTML attributes to `<a>` tags as well.
@@ -584,7 +663,7 @@ Menu::make('MyNavBar', function($menu){
 ?>
 ```
 
-### Link's Href Property
+#### Link's Href Property
 
 If you don't want to use the routing feature of `laravel-menu` or you don't want the builder to prefix your URL with anything (your host address for example), you can explicitly set your link's href property:
 
@@ -644,13 +723,13 @@ You can also choose the element to be activated (item or the link) in `options.p
 
 ```
 
-**RESTful URLs**
+#### RESTful URLs
 
 RESTful URLs are also supported as long as `resful` option is set as `true` in `config/settings.php` file, E.g. item with url `resource` will be activated by `resource/slug` or `resource/slug/edit`.  
 
 You might encounter situations where your app is in a directory instead of the root directory or your resources have a common prefix; In such case you need to set `rest_base` option to a proper prefix for a better restful activation support. `rest_base` can take a simple string, array of string or a function call as value.
 
-**URL Wildcards**
+#### URL Wildcards
 
 You're also able to define a pattern for a certain item, if the automatic activation can't help:
 
@@ -760,6 +839,8 @@ The above code will result:
 </ul>
 
 ```
+
+You can call `prepend` and `append` on collections as well.
 
 ## Raw Items
 
@@ -956,6 +1037,21 @@ You can also access a data as if it's a property:
 
 Meta data don't do anything to the item and won't be rendered in HTML either. It is the developer who would decide what to do with them.
 
+You can use `data` on a collection, if you need to target a group of items:
+
+```php
+<?php
+  // ...
+  $menu->add('Users', 'users');
+  
+  $menu->users->add('New User', 'users/new');
+  $menu->users->add('Uses', 'users');
+  
+  // add a meta data to children of Users
+  $menu->users->children()->data('anything', 'value');
+  
+  // ...
+```
 
 ## Filtering the Items
 
@@ -1060,7 +1156,7 @@ The closure takes the items collection as argument.
 
 Several rendering formats are available out of the box:
 
-* **Menu as Unordered List**
+#### Menu as Unordered List
 
 ```html
   {{ $MenuName->asUl() }}
@@ -1083,7 +1179,7 @@ Result:
 </ul>
 ```
 
-* **Menu as Ordered List**
+#### Menu as Ordered List
 
 
 ```php
@@ -1107,7 +1203,7 @@ Result:
 </ol>
 ```
 
-* **Menu as Div**
+#### Menu as Div
 
 
 ```php
@@ -1131,7 +1227,7 @@ Result:
 </div>
 ```
 
-* **Menu as Bootstrap 3 Navbar**
+#### Menu as Bootstrap 3 Navbar
 
 Laravel Menu provides a parital view out of the box which generates menu items in a bootstrap friendly style which you can **include** in your Bootstrap based navigation bars:
 
@@ -1268,6 +1364,7 @@ You can adjust the behavior of the menu builder in `config/settings.php` file. C
 * **auto_activate** Automatically activates menu items based on the current URI
 * **activate_parents** Activates the parents of an active item
 * **restful** Activates RESTful URLS. E.g `resource/slug` will activate item with `resource` url.
+* **cascade_data** If you need descendants of an item to inherit meta data from their parents, make sure this option is enabled.
 * **rest_base** The base URL that all restful resources might be prefixed with.
 * **active_element** You can choose the HTML element to which you want to add activation classes (anchor or the wrapping element).
 
