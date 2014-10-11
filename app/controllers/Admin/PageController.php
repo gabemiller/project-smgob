@@ -3,7 +3,7 @@
 namespace Admin;
 
 use Divide\CMS\Page;
-use Divide\CMS\Gallery;
+use Divide\CMS\gallery_id;
 use View;
 use Input;
 use Response;
@@ -36,7 +36,7 @@ class PageController extends \BaseController {
 
         View::share('title', 'Oldal létrehozás');
 
-        $this->layout->content = View::make('admin.page.create')->with('galleries', Gallery::getGalleries())->with('pages', Page::getPages());
+        $this->layout->content = View::make('admin.page.create')->with('galleries', gallery_id::getGalleries())->with('pages', Page::getPages());
     }
 
     /**
@@ -62,10 +62,8 @@ class PageController extends \BaseController {
             $page = new Page();
 
             $page->title = Input::get('title');
-            $page->menu = Input::get('menu');
-            $page->parent = Input::get('parent');
             $page->content = Input::get('content');
-            $page->gallery_id = is_numeric(Input::get('gallery')) ? Input::get('gallery') : 0;
+            $page->gallery_id = is_numeric(Input::get('gallery_id')) ? Input::get('gallery_id') : 0;
 
             if ($page->save()) {
                 return Redirect::back()->with('message', 'Az oldal létrehozása sikerült!');
@@ -103,7 +101,7 @@ class PageController extends \BaseController {
     public function edit($id) {
         $page = Page::find($id);
         View::share('title', 'Oldal: ' . $page->title);
-        $this->layout->content = View::make('admin.page.edit')->with('page', $page)->with('galleries', Gallery::getGalleries())->with('pages', Page::getPages($id));
+        $this->layout->content = View::make('admin.page.edit')->with('page', $page)->with('galleries', gallery_id::getGalleries())->with('pages', Page::getPages($id));
     }
 
     /**
@@ -118,7 +116,6 @@ class PageController extends \BaseController {
 
             $rules = array(
                 'title' => 'required|unique:pages,title,' . $id,
-                'menu' => 'required|unique:pages,menu,' . $id,
                 'content' => 'required'
             );
 
@@ -131,10 +128,8 @@ class PageController extends \BaseController {
             $page = Page::find($id);
 
             $page->title = Input::get('title');
-            $page->menu = Input::get('menu');
-            $page->parent = Input::get('parent');
             $page->content = Input::get('content');
-            $page->gallery_id = is_numeric(Input::get('gallery')) ? Input::get('gallery') : 0;
+            $page->gallery_id = is_numeric(Input::get('gallery_id')) ? Input::get('gallery_id') : 0;
 
             if ($page->save()) {
                 return Redirect::back()->with('message', 'Az oldal módosítása sikerült!');
@@ -161,7 +156,6 @@ class PageController extends \BaseController {
         try {
 
             $page = Page::find($id);
-
 
             if ($page->delete()) {
                 return Response::json(['message' => 'A(z) ' . $id . ' azonosítójú oldal törlése sikerült!', 'status' => true]);
