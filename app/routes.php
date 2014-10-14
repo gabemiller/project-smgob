@@ -9,6 +9,12 @@
  *
  */
 
+Route::get('test',function(){
+
+    dd(Route::getRoutes()->getByName('hirek.show'));
+
+});
+
 Route::get('/', ['uses' => 'Site\HomeController@index', 'as' => 'fooldal']);
 
 Route::get('hirek/{id}/{title}', ['uses' => 'Site\ArticleController@show', 'as' => 'hirek.show'])->where('id', '[0-9]+')->where('title', '[0-9A-z_-]+');
@@ -108,6 +114,8 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'use
     Route::resource('dokumentum', 'DocumentController');
 
     Route::resource('dokumentum-kategoria', 'DocumentCategoryController');
+
+    Route::resource('menu-kezelo', 'MenuController');
 
     Route::resource('galeria', 'GalleryController');
 

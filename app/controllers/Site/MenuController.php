@@ -4,6 +4,8 @@ namespace Site;
 
 class MenuController extends \BaseController {
 
+
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /site/menu

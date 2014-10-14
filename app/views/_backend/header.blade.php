@@ -75,8 +75,10 @@
                 {{HTML::activeMenu(HTML::linkRoute('admin.galeria.index','<i class="fa fa-photo"></i> Galéria'),'admin/galeria')}}
 
                 {{HTML::activeMenu(HTML::linkRoute('admin.dokumentum.index','<i class="fa fa-book"></i> Dokumentumok'),'admin/dokumentum')}}
-                {{HTML::activeMenu(HTML::linkRoute('admin.dokumentum-kategoria.create','<i class="fa fa-book"></i> Dokumentumok kategória'),'admin/dokumentum-kategoria/*')}}
-                
+                {{HTML::activeMenu(HTML::linkRoute('admin.dokumentum-kategoria.create','<i class="fa fa-book"></i> Dokumentumok kategória'),'admin/dokumentum-kategoria/create')}}
+
+                {{HTML::activeMenu(HTML::linkRoute('admin.dokumentum-kategoria.create','<i class="fa fa-book"></i> Dokumentumok kategória'),'admin/dokumentum-kategoria')}}
+
                 {{HTML::activeMenu(HTML::linkRoute('admin.oldal.index','<i class="fa fa-sitemap"></i> Oldalak'),'admin/oldal')}}
                 {{HTML::activeMenu(HTML::linkRoute('admin.felhasznalok.felhasznalo.index','<i class="fa fa-users"></i> Felhasználók'),'admin/felhasznalok/felhasznalo')}}
             </ul>

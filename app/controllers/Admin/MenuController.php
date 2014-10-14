@@ -4,8 +4,9 @@ namespace Admin;
 
 use Symfony\Component\Console\Helper\Helper;
 
-class MenuController extends \BaseController
-{
+class MenuController extends \BaseController{
+
+    protected $layout = '_backend.master';
 
     /**
      * Display a listing of the resource.
@@ -13,9 +14,10 @@ class MenuController extends \BaseController
      *
      * @return Response
      */
-    public function index()
-    {
-        //
+    public function index(){
+        View::share('title', 'Oldalak');
+
+        $this->layout->content = View::make('admin.menu.index')->with('menus', Event::all(['id','title','start_at','end_at']));
     }
 
     /**
