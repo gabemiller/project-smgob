@@ -3,7 +3,7 @@
 namespace Admin;
 
 use Divide\CMS\Page;
-use Divide\CMS\gallery_id;
+use Divide\CMS\Gallery;
 use View;
 use Input;
 use Response;
@@ -36,7 +36,7 @@ class PageController extends \BaseController {
 
         View::share('title', 'Oldal létrehozás');
 
-        $this->layout->content = View::make('admin.page.create')->with('galleries', Gallery::getGalleries())->with('pages', Page::getPages());
+        $this->layout->content = View::make('admin.page.create')->with('galleries', Gallery::getGalleries());
     }
 
     /**
@@ -101,7 +101,7 @@ class PageController extends \BaseController {
     public function edit($id) {
         $page = Page::find($id);
         View::share('title', 'Oldal: ' . $page->title);
-        $this->layout->content = View::make('admin.page.edit')->with('page', $page)->with('galleries', Gallery::getGalleries())->with('pages', Page::getPages($id));
+        $this->layout->content = View::make('admin.page.edit')->with('page', $page)->with('galleries', Gallery::getGalleries());
     }
 
     /**

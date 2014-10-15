@@ -16,33 +16,31 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
 
+            {{Form::open(array('url' => URL::route('admin.dokumentum-kategoria.store',array()),'method'=>'POST'))}}
             <div class="box box-solid box-divide">
                 <div class="box-header">
                     <h3 class="box-title">Új dokumentum kategória</h3>
                 </div>
                 <div class="box-body">
-                    {{Form::open(array('url' => URL::route('admin.dokumentum-kategoria.store',array()),'class'=>'form-horizontal','method'=>'POST'))}}
+
                     <div class="form-group">
-                        {{Form::label('parent_id', 'Szülő kategória',array('class'=>'col-lg-2 control-label'))}}
-                        <div class="col-lg-9">
+                        {{Form::label('parent_id', 'Szülő kategória',array('class'=>'control-label'))}}
+                        <div>
                             {{Form::selection('parent_id', $categories,array('class'=>'form-control'));}}
                         </div>
                     </div>
                     <div class="form-group">
-                        {{Form::label('name', 'Név',array('class'=>'col-lg-2 control-label'))}}
-                        <div class="col-lg-9">
+                        {{Form::label('name', 'Név',array('class'=>'control-label'))}}
+                        <div>
                             {{Form::input('text','name','',array('class'=>'form-control','placeholder'=>'Név'))}}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-9">
-                        {{Form::submit('Mentés',array('class'=>'btn btn-divide btn-sm btn-copy'))}}
-                        </div>
-                    </div>
-                    {{Form::close()}}
+                </div>
+                <div class="box-footer">
+                    {{Form::submit('Mentés',array('class'=>'btn btn-divide btn-sm'))}}
                 </div>
             </div>
+            {{Form::close()}}
 
         </div>
 
@@ -54,7 +52,6 @@
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
-                        {{Form::button('Törlés',array('type'=>'button','class'=>'btn btn-danger btn-sm','id'=>'deleteButton'))}}
                         <table class="table-sortable">
                             <thead>
                                 <tr>
@@ -71,8 +68,10 @@
                             </tbody>
                             @include('_backend.table-footer')
                         </table>
-                        {{Form::button('Törlés',array('type'=>'button','class'=>'btn btn-danger btn-sm','id'=>'deleteButton'))}}
                     </div>
+                </div>
+                <div class="box-footer">
+                    {{Form::button('Törlés',array('type'=>'button','class'=>'btn btn-danger btn-sm','id'=>'deleteButton'))}}
                 </div>
             </div>
 

@@ -2,6 +2,10 @@
 
 namespace Divide\Helper;
 
+/**
+ * Divide\Helper\Tag
+ *
+ */
 class Tag extends \Eloquent {
 
     /**

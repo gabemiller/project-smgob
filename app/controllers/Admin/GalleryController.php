@@ -18,7 +18,8 @@ use Config;
 use File;
 use Str;
 
-class GalleryController extends \BaseController {
+class GalleryController extends \BaseController
+{
 
     protected $layout = '_backend.master';
 
@@ -28,10 +29,11 @@ class GalleryController extends \BaseController {
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         View::share('title', 'Galériák');
 
-        $this->layout->content = View::make('admin.gallery.index')->with('galleries', Gallery::all(['id','name','created_at']));
+        $this->layout->content = View::make('admin.gallery.index')->with('galleries', Gallery::all(['id', 'name', 'created_at']));
     }
 
     /**
@@ -40,7 +42,8 @@ class GalleryController extends \BaseController {
      *
      * @return Response
      */
-    public function create() {
+    public function create()
+    {
         View::share('title', 'Galéria létrehozása');
 
         $this->layout->content = View::make('admin.gallery.create');
@@ -52,7 +55,8 @@ class GalleryController extends \BaseController {
      *
      * @return Response
      */
-    public function store() {
+    public function store()
+    {
 
         try {
 
@@ -89,10 +93,11 @@ class GalleryController extends \BaseController {
      * Display the specified resource.
      * GET /admin\gallery/{id}
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         View::share('title', 'Oldalak');
 
         $this->layout->content = View::make('admin.gallery.show')->with('gallery', Gallery::find($id));
@@ -102,10 +107,11 @@ class GalleryController extends \BaseController {
      * Show the form for editing the specified resource.
      * GET /admin\gallery/{id}/edit
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         View::share('title', 'Galéria módosítása');
 
         $this->layout->content = View::make('admin.gallery.edit')->with('gallery', Gallery::find($id));
@@ -115,10 +121,11 @@ class GalleryController extends \BaseController {
      * Update the specified resource in storage.
      * PUT /admin\gallery/{id}
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function update($id) {
+    public function update($id)
+    {
 
         try {
 
@@ -155,10 +162,11 @@ class GalleryController extends \BaseController {
      * Remove the specified resource from storage.
      * DELETE /admin\gallery/{id}
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         try {
 
             $gallery = Gallery::find($id);
@@ -182,17 +190,18 @@ class GalleryController extends \BaseController {
     }
 
     /**
-     * 
+     *
      * @param type $id
      */
-    public function getPicture($id) {
+    public function getPicture($id)
+    {
         View::share('title', 'Oldalak');
 
         $this->layout->content = View::make('admin.gallery.upload')->with('gallery', Gallery::find($id));
     }
 
     /**
-     * 
+     *
      */
     /* public function postPicture() {
 
@@ -243,7 +252,8 @@ class GalleryController extends \BaseController {
       } */
 
 
-    public function postPicture() {
+    public function postPicture()
+    {
 
         try {
 
@@ -305,14 +315,14 @@ class GalleryController extends \BaseController {
                     } else {
                         return Redirect::back()->withErrors('Hiba történt a képfájl mentésekor! ' . $image->getClientOriginalName());
                     }
-                    
+
                 } else {
                     return Redirect::back()->withErrors($validator->errors());
                 }
             }
 
             return Redirect::back()->with('message', 'A képfájlok feltöltése sikeres volt!');
-            
+
         } catch (Exception $e) {
             if (Config::get('app.debug')) {
                 return Response::json(['message' => $e->getMessage(), 'status' => false]);
@@ -323,9 +333,10 @@ class GalleryController extends \BaseController {
     }
 
     /**
-     * 
+     *
      */
-    public function deletePicture($id) {
+    public function deletePicture($id)
+    {
         $picture = Picture::find($id);
 
         if (File::delete(public_path() . '/' . $picture->picture_path) && File::delete(public_path() . '/' . $picture->thumbnail_path) && $picture->delete()) {

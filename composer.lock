@@ -604,12 +604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lavary/laravel-menu.git",
-                "reference": "4db19768ed33a4b4de9a3ba3047e66dd3db85663"
+                "reference": "8298ef023e67164d5de752fcf241235207ffeeb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/4db19768ed33a4b4de9a3ba3047e66dd3db85663",
-                "reference": "4db19768ed33a4b4de9a3ba3047e66dd3db85663",
+                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/8298ef023e67164d5de752fcf241235207ffeeb8",
+                "reference": "8298ef023e67164d5de752fcf241235207ffeeb8",
                 "shasum": ""
             },
             "require": {
@@ -638,7 +638,7 @@
             "keywords": [
                 "laravel"
             ],
-            "time": "2014-10-11 12:30:04"
+            "time": "2014-10-13 11:54:54"
         },
         {
             "name": "monolog/monolog",

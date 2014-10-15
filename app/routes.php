@@ -1,6 +1,14 @@
 <?php
 
 /**
+ * Patterns
+ */
+
+Route::pattern('title', '[0-9A-z_-]+');
+Route::pattern('id', '[0-9]+');
+Route::pattern('tagSlug', '[0-9A-z_-]+');
+
+/**
  * -----------------------------------------------------------------------------
  * Site
  * -----------------------------------------------------------------------------
@@ -9,32 +17,25 @@
  *
  */
 
-Route::get('test',function(){
-
-    dd(Route::getRoutes()->getByName('hirek.show'));
-
-});
-
 Route::get('/', ['uses' => 'Site\HomeController@index', 'as' => 'fooldal']);
 
-Route::get('hirek/{id}/{title}', ['uses' => 'Site\ArticleController@show', 'as' => 'hirek.show'])->where('id', '[0-9]+')->where('title', '[0-9A-z_-]+');
+Route::get('hirek/{id}/{title}', ['uses' => 'Site\ArticleController@show', 'as' => 'hirek.show']);
 
-Route::get('hirek/cimke/{id}/{tagSlug}', ['uses' => 'Site\ArticleController@tag', 'as' => 'hirek.tag'])->where('id', '[0-9]+')->where('tagSlug', '[0-9A-z_-]+');
+Route::get('hirek/cimke/{id}/{tagSlug}', ['uses' => 'Site\ArticleController@tag', 'as' => 'hirek.tag']);
 
 Route::get('esemenyek', ['uses' => 'Site\EventController@index', 'as' => 'esemenyek.index']);
 
-Route::get('esemenyek/{id}/{title}', ['uses' => 'Site\EventController@show', 'as' => 'esemenyek.show'])->where('id', '[0-9]+')->where('title', '[0-9A-z_-]+');
+Route::get('esemenyek/{id}/{title}', ['uses' => 'Site\EventController@show', 'as' => 'esemenyek.show']);
 
-Route::get('esemenyek/cimke/{id}/{tagSlug}', ['uses' => 'Site\EventController@tag', 'as' => 'esemenyek.tag'])->where('id', '[0-9]+')->where('tagSlug', '[0-9A-z_-]+');
+Route::get('esemenyek/cimke/{id}/{tagSlug}', ['uses' => 'Site\EventController@tag', 'as' => 'esemenyek.tag']);
 
 Route::get('galeriak', ['uses' => 'Site\GalleryController@index', 'as' => 'galeriak.index']);
 
-Route::get('galeriak/{id}/{title}', ['uses' => 'Site\GalleryController@show', 'as' => 'galeriak.show'])->where('id', '[0-9]+')->where('title', '[0-9A-z_-]+');
+Route::get('galeriak/{id}/{title}', ['uses' => 'Site\GalleryController@show', 'as' => 'galeriak.show']);
 
-Route::get('oldal/{id}/{title}', ['uses' => 'Site\PageController@show', 'as' => 'oldalak.show'])->where('id', '[0-9]+')->where('title', '[0-9A-z_-]+');
+Route::get('oldal/{id}/{title}', ['uses' => 'Site\PageController@show', 'as' => 'oldalak.show']);
 
-Route::get('documentumok', ['uses' => 'Site\DocumentController@index', 'as' => 'dokumentumok.index']);
-Route::post('documentumok', ['uses' => 'Site\DocumentController@index', 'as' => 'dokumentumok.index']);
+Route::match(['GET', 'POST'], 'dokumentumok', ['uses' => 'Site\DocumentController@index', 'as' => 'dokumentumok.index']);
 
 /**
  * -----------------------------------------------------------------------------
@@ -48,7 +49,8 @@ if (!Request::is('admin') && !Request::is('admin/*')) {
 
     Menu::make('mainMenu', function ($menu) {
 
-        $menu->add('Főoldal', array('route' => 'fooldal'));
+        $menu->add('Főoldal',
+            ['route' => 'fooldal']);
 
         //$menu->add('Események', array('route' => 'esemenyek.index'));
 
@@ -142,3 +144,47 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'use
         Route::resource('felhasznalo-csoport', 'GroupsController');
     });
 });
+
+
+/**
+ * -----------------------------------------------------------------------------
+ * Admin menu
+ * -----------------------------------------------------------------------------
+ *
+ * Az adminfelülethez tarozó menu-k.
+ *
+ */
+if (Request::is('admin') || Request::is('admin/*')) {
+
+    Menu::make('adminMenu', function ($menu) {
+
+        $menu->add('<i class="fa fa-dashboard"></i> Vezérlőpult',
+            ['route' => 'admin.vezerlopult']);
+
+        $menu->add('<i class="fa fa-file-text-o"></i> Hírek',
+            ['route' => 'admin.hir.index']);
+
+        $menu->add('<i class="fa fa-calendar"></i> Események',
+            ['route' => 'admin.esemeny.index']);
+
+        $menu->add('<i class="fa fa-photo"></i> Galéria',
+            ['route' => 'admin.galeria.index']);
+
+        $menu->add('<i class="fa fa-book"></i> Dokumentumok',
+            ['route' => 'admin.dokumentum.index']);
+
+        $menu->add('<i class="fa fa-book"></i> Dokumentumok kategória',
+            ['route' => 'admin.dokumentum-kategoria.create']);
+
+        $menu->add('<i class="fa fa-bars"></i> Menü kezelő',
+            ['route' => 'admin.menu-kezelo.create']);
+
+        $menu->add('<i class="fa fa-sitemap"></i> Oldalak',
+            ['route' => 'admin.oldal.index']);
+
+        $menu->add('<i class="fa fa-users"></i> Felhasználók',
+            ['route' => 'admin.felhasznalok.felhasznalo.index']);
+
+
+    });
+}

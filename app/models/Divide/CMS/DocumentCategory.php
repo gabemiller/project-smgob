@@ -2,6 +2,12 @@
 
 namespace Divide\CMS;
 
+/**
+ * Divide\CMS\DocumentCategory
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Divide\CMS\Document[] $documents
+ * @property-read \Divide\CMS\DocumentCategory $ancestor
+ */
 class DocumentCategory extends \Eloquent {
 
     protected $table = 'documentcategory';

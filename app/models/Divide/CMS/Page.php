@@ -4,6 +4,11 @@ namespace Divide\CMS;
 
 use Str;
 
+/**
+ * Divide\CMS\Page
+ *
+ * @property-read \Divide\CMS\Gallery $gallery
+ */
 class Page extends \Eloquent {
 
 //protected $fillable = [];

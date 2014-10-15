@@ -4,6 +4,15 @@ namespace Divide\CMS;
 
 use Str;
 
+/**
+ * Divide\CMS\Article
+ *
+ * @property-read \Divide\CMS\Gallery $gallery
+ * @property-read \Divide\CMS\User $author
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Conner\Tagging\Tagged[] $tagged
+ * @method static \Divide\CMS\Article withAllTags($tagNames) 
+ * @method static \Divide\CMS\Article withAnyTag($tagNames) 
+ */
 class Article extends \Eloquent {
 
     use \Conner\Tagging\TaggableTrait;

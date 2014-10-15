@@ -61,27 +61,16 @@
             <!-- search form -->
             <!--form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    {{ Form::text('menuSearch','',array('placeholder'=>'Keresés...','class'=>'form-control'))}}
+                    {{-- Form::text('menuSearch','',array('placeholder'=>'Keresés...','class'=>'form-control'))--}}
                     <span class="input-group-btn">
-                        {{HTML::decode(Form::button('<i class="fa fa-search"></i>',array('class'=>'btn btn-flat','type'=>'submit')))}}
+                        {{--HTML::decode(Form::button('<i class="fa fa-search"></i>',array('class'=>'btn btn-flat','type'=>'submit')))--}}
                     </span>
                 </div>
             </form-->
             <!-- /.search form -->
-            <ul class="sidebar-menu">
-                {{HTML::activeMenu(HTML::linkRoute('admin.vezerlopult','<i class="fa fa-dashboard"></i> Vezérlőpult'),'admin')}}
-                {{HTML::activeMenu(HTML::linkRoute('admin.hir.index','<i class="fa fa-file-text-o"></i> Hírek'),'admin/hir')}}
-                {{HTML::activeMenu(HTML::linkRoute('admin.esemeny.index','<i class="fa fa-calendar"></i> Események'),'admin/esemeny')}}
-                {{HTML::activeMenu(HTML::linkRoute('admin.galeria.index','<i class="fa fa-photo"></i> Galéria'),'admin/galeria')}}
 
-                {{HTML::activeMenu(HTML::linkRoute('admin.dokumentum.index','<i class="fa fa-book"></i> Dokumentumok'),'admin/dokumentum')}}
-                {{HTML::activeMenu(HTML::linkRoute('admin.dokumentum-kategoria.create','<i class="fa fa-book"></i> Dokumentumok kategória'),'admin/dokumentum-kategoria/create')}}
+            {{$adminMenu->asUl(['class'=>'sidebar-menu'])}}
 
-                {{HTML::activeMenu(HTML::linkRoute('admin.dokumentum-kategoria.create','<i class="fa fa-book"></i> Dokumentumok kategória'),'admin/dokumentum-kategoria')}}
-
-                {{HTML::activeMenu(HTML::linkRoute('admin.oldal.index','<i class="fa fa-sitemap"></i> Oldalak'),'admin/oldal')}}
-                {{HTML::activeMenu(HTML::linkRoute('admin.felhasznalok.felhasznalo.index','<i class="fa fa-users"></i> Felhasználók'),'admin/felhasznalok/felhasznalo')}}
-            </ul>
         </section>
         <!-- /.sidebar -->
     </aside>

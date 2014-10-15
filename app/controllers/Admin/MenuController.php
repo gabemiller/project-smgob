@@ -2,23 +2,17 @@
 
 namespace Admin;
 
-use Symfony\Component\Console\Helper\Helper;
+use Divide\CMS\Menu;
+use Divide\CMS\MenuItem;
+use View;
+use Response;
+use Exception;
+use Input;
 
-class MenuController extends \BaseController{
+class MenuController extends \BaseController
+{
 
     protected $layout = '_backend.master';
-
-    /**
-     * Display a listing of the resource.
-     * GET /admin/menu
-     *
-     * @return Response
-     */
-    public function index(){
-        View::share('title', 'Oldalak');
-
-        $this->layout->content = View::make('admin.menu.index')->with('menus', Event::all(['id','title','start_at','end_at']));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +22,13 @@ class MenuController extends \BaseController{
      */
     public function create()
     {
-        //
+        View::share('title', 'Menüpontok');
+
+        $this->layout->content = View::make('admin.menu.create')
+            ->with('menuItems', MenuItem::all())
+            ->with('menus', Menu::getMenus())
+            ->with('parents', MenuItem::getMenuItems())
+            ->with('types', MenuItem::types());
     }
 
     /**
@@ -39,19 +39,33 @@ class MenuController extends \BaseController{
      */
     public function store()
     {
-        //
-    }
+        $menuItem = new MenuItem();
 
-    /**
-     * Display the specified resource.
-     * GET /admin/menu/{id}
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-
+        dd(Input::all());
+        if (Input::has('type')) {
+            switch (Input::get('type')) {
+                case 1:
+                    $menuItem->url = '/';
+                    break;
+                case 2:
+                    $menuItem->url = Input::get('url');
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+            }
+        }
     }
 
     /**

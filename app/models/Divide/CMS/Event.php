@@ -4,6 +4,14 @@ namespace Divide\CMS;
 
 use Str;
 
+/**
+ * Divide\CMS\Event
+ *
+ * @property-read \Divide\CMS\Gallery $gallery
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Conner\Tagging\Tagged[] $tagged
+ * @method static \Divide\CMS\Event withAllTags($tagNames) 
+ * @method static \Divide\CMS\Event withAnyTag($tagNames) 
+ */
 class Event extends \Eloquent {
 
     use \Conner\Tagging\TaggableTrait;
