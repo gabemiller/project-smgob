@@ -168,29 +168,79 @@ if (Request::is('admin') || Request::is('admin/*')) {
         $menu->add('<i class="fa fa-dashboard"></i> Vezérlőpult',
             ['route' => 'admin.vezerlopult']);
 
-        $menu->add('<i class="fa fa-file-text-o"></i> Hírek',
-            ['route' => 'admin.hir.index']);
+        /**
+         * Bejegyzés menüpont
+         */
+        $menu->add('Bejegyzés', ['class' => 'treeview'])
+            ->append('<i class="fa pull-right fa-angle-left"></i>')
+            ->prepend('<i class="fa fa-pencil"></i> ');
 
-        $menu->add('<i class="fa fa-calendar"></i> Események',
-            ['route' => 'admin.esemeny.index']);
+        $menu->get('bejegyzés')->add('Új hozzáadása',
+            ['route' => 'admin.hir.create'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
 
-        $menu->add('<i class="fa fa-photo"></i> Galéria',
-            ['route' => 'admin.galeria.index']);
+        $menu->get('bejegyzés')->add('Összes hír',
+            ['route' => 'admin.hir.index'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
 
-        $menu->add('<i class="fa fa-book"></i> Dokumentumok',
-            ['route' => 'admin.dokumentum.index']);
+        /**
+         *
+         */
+        $menu->add('Esemény', ['class' => 'treeview'])
+            ->append('<i class="fa pull-right fa-angle-left"></i>')
+            ->prepend('<i class="fa fa-calendar"></i> ');
 
-        $menu->add('<i class="fa fa-book"></i> Dokumentumok kategória',
-            ['route' => 'admin.dokumentum-kategoria.create']);
+        $menu->get('esemény')->add('Új hozzáadása',
+            ['route' => 'admin.esemeny.create'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
 
+        $menu->get('esemény')->add('Összes esemény',
+            ['route' => 'admin.esemeny.index'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
+
+        /**
+         * Média menüpont
+         */
+        $menu->add('Média', ['class' => 'treeview'])
+            ->append('<i class="fa pull-right fa-angle-left"></i>')
+            ->prepend('<i class="fa fa-photo"></i> ')
+            ->active('/admin/dokumentum-kategoria/*');
+
+        $menu->get('média')->add('Képgaléria',
+            ['route' => 'admin.galeria.index'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
+
+        $menu->get('média')->add('Dokumentumok',
+            ['route' => 'admin.dokumentum.index'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
+
+        /**
+         * Oldal menüpont
+         */
+        $menu->add('<i class="fa fa-file-text-o"></i> Oldalak',
+            ['route' => 'admin.oldal.index']);
+
+        /**
+         * Menükezelő menüpont
+         */
         $menu->add('<i class="fa fa-bars"></i> Menü kezelő',
             ['route' => 'admin.menu-kezelo.create']);
 
-        $menu->add('<i class="fa fa-sitemap"></i> Oldalak',
-            ['route' => 'admin.oldal.index']);
+        /**
+         * Felhasználók menüpont
+         */
 
-        $menu->add('<i class="fa fa-users"></i> Felhasználók',
-            ['route' => 'admin.felhasznalok.felhasznalo.index']);
+        $menu->add('Felhasználók', ['class' => 'treeview'])
+            ->append('<i class="fa pull-right fa-angle-left"></i>')
+            ->prepend('<i class="fa fa-users"></i> ');
+
+        $menu->get('felhasználók')->add('Új hozzáadása',
+            ['route' => 'admin.felhasznalok.felhasznalo.create'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
+
+        $menu->get('felhasználók')->add('Összes felhasználó',
+            ['route' => 'admin.felhasznalok.felhasznalo.index'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
 
 
     });

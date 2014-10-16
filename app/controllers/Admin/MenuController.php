@@ -70,8 +70,12 @@ class MenuController extends \BaseController
                 case 'egy-bejegyzes':
                     break;
                 case 'esemenyek':
-                    $tags = Tag::find(Input::get('tag'))->select(['id', 'slug']);
-                    $menuItem->url = route('esemenyek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
+                    if (false) {
+                        $menuItem->url = route('esemenyek.index');
+                    } else {
+                        $tags = Tag::find(Input::get('tag'))->select(['id', 'slug']);
+                        $menuItem->url = route('esemenyek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
+                    }
                     break;
                 case 'egy-esemeny':
                     break;

@@ -12,6 +12,7 @@
             <div class="box box-solid">
                 <div class="box-body">
                     {{HTML::link('admin/dokumentum/create','Új dokumentum',array('class'=>'btn btn-divide btn-sm'))}}
+                    {{HTML::link('admin/dokumentum-kategoria/create','Új dokumentum kategória',array('class'=>'btn btn-divide btn-sm'))}}
                     {{Form::button('Törlés',array('type'=>'button','class'=>'btn btn-danger btn-sm','id'=>'deleteButton'))}}
                 </div>
             </div>
