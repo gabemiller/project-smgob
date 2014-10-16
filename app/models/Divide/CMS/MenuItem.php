@@ -1,6 +1,8 @@
 <?php
 
 namespace Divide\CMS;
+use URL;
+use Str;
 
 /**
  * Divide\CMS\MenuItem
@@ -13,6 +15,12 @@ class MenuItem extends \Eloquent
      * @var array
      */
     protected $fillable = ['menu_id', 'parent_id', 'name', 'type', 'url'];
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
+
     /**
      * @var string
      */
@@ -73,6 +81,27 @@ class MenuItem extends \Eloquent
         }
 
         return $menuItems;
+    }
+
+    /**
+     * @param $menu
+     * @param $id
+     */
+    public static function generateMenu($menu, $id) {
+        $menuItems = MenuItem::where('parent_id', '=', $id)->get();
+
+        if ($id == null) {
+            foreach ($menuItems as $menuItem) {
+                $menu->add($menuItem->name, array('url' => URL::to($menuItem->url)));
+                static::generateMenu($menu, $menuItem->id);
+            }
+        } else {
+            foreach ($menuItems as $menuItem) {
+                $parent = MenuItem::find($menuItem->parent_id);
+                $menu->get(Str::camel($parent->name))->add($menuItem->name, array('url' => URL::to($menuItem->url)));
+                static::generateMenu($menu, $menuItem->id);
+            }
+        }
     }
 
 }

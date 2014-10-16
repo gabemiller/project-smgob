@@ -19,13 +19,15 @@ class CreateMenuitemTable extends Migration {
             // Menu azonosító
             $table->integer('menu_id')->length(10)->unsigned();
             // Szülő azonosító
-            $table->integer('parent_id')->length(10)->unsigned();
+            $table->integer('parent_id')->length(10)->unsigned()->nullable();
             // Menüpont név
             $table->string('name');
             // Menüpont típus
             $table->string('type');
             // Url az adott oldalhoz
             $table->string('url');
+            // A menü sorrendje
+            $table->integer('order')->unsigned();
 			$table->timestamps();
 
             // Unique, Foreign key

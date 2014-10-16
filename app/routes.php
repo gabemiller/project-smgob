@@ -56,36 +56,8 @@ if (!Request::is('admin') && !Request::is('admin/*')) {
 
     Menu::make('mainMenu', function ($menu) {
 
-        $menu->add('Főoldal',
-            ['route' => 'fooldal']);
+        \Divide\CMS\MenuItem::generateMenu($menu,null);
 
-        //$menu->add('Események', array('route' => 'esemenyek.index'));
-
-        //$menu->add('Galériák', array('route' => 'galeriak.index'));
-
-        //$menu->add('Dokumentumok', array('route' => 'dokumentumok.index'));
-
-        try {
-            $pages = \Divide\CMS\Page::where('parent', '=', 0)->get();
-
-            foreach ($pages as $page) {
-                $menu->add($page->menu, array('route' => 'fooldal'));
-            }
-        } catch (\Exception $e) {
-
-        }
-
-        /*try {
-            \Divide\CMS\Page::getPagesForMenu($menu, 0);
-
-            foreach ($menu->all() as $item) {
-                if ($item->hasChildren()) {
-                    $item->append('<i class="fa fa-bars"></i>');
-                }
-            }
-        } catch (\Exception $e) {
-            
-        }*/
     });
 }
 

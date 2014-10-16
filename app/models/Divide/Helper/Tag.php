@@ -30,7 +30,7 @@ class Tag extends \Eloquent
      */
     public static function getArray()
     {
-        $arr = array();
+        $arr = array(0=>'Nincs címke!');
 
         foreach (static::all(['id', 'name']) as $item) {
             $arr[$item->id] = $item->name;

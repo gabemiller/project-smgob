@@ -26,12 +26,14 @@
                         {{Form::label('parent_id', 'Szülő menüpont',array('class'=>'control-label'))}}
                         <div>
                             {{Form::select('parent_id', $parents,null,array('class'=>'form-control'))}}
+                            <p class="help-block">Ez lesz a szülőmenüpontja az új menüpontnak.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         {{Form::label('name', 'Név',array('class'=>'control-label'))}}
                         <div>
                             {{Form::input('text','name','',array('class'=>'form-control','placeholder'=>'Név'))}}
+                            <p class="help-block">A menüpont neve. Csak olyan név lehet, ami nem szerepel még az adatbázisban.</p>
                         </div>
                     </div>
 
@@ -39,6 +41,7 @@
                         {{Form::label('type', 'Típus',array('class'=>'control-label'))}}
                         <div>
                             {{Form::select('type', $types,null,array('class'=>'form-control'))}}
+                            <p class="help-block">Ez fog megjelenni a menüpontra kattintva.</p>
                         </div>
                     </div>
 
@@ -54,15 +57,15 @@
                             <div class="form-group">
                                 {{Form::label('url', 'Külső hivatkozás',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::input('text','url','',array('class'=>'form-control','placeholder'=>'Hivatkozás'))}}
+                                    {{Form::input('text','url','',array('class'=>'form-control','placeholder'=>'http://pelda.hu'))}}
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="bejegyzesek">
                             <div class="form-group">
-                                {{Form::label('tag', 'Bejegyzés címke',array('class'=>'control-label'))}}
+                                {{Form::label('articleTag', 'Bejegyzés címke',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::select('tag', $articleTags,null,array('class'=>'form-control'))}}
+                                    {{Form::select('articleTag', $articleTags,null,array('class'=>'form-control'))}}
                                 </div>
                             </div>
                         </div>
@@ -76,9 +79,9 @@
                         </div>
                         <div class="tab-pane" id="esemenyek">
                             <div class="form-group">
-                                {{Form::label('tag', 'Esemény címke',array('class'=>'control-label'))}}
+                                {{Form::label('eventTag', 'Esemény címke',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::select('tag', $eventTags,null,array('class'=>'form-control'))}}
+                                    {{Form::select('eventTag', $eventTags,null,array('class'=>'form-control'))}}
                                 </div>
                             </div>
                         </div>
@@ -140,11 +143,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @each('admin.menu.single',$menuItems,'menu','admin.menu.empty')
+                            @each('admin.menu.single',$menuItems,'menuItem','admin.menu.empty')
                             </tbody>
                             @include('_backend.table-footer')
                         </table>
                     </div>
+                </div>
+                <div class="box-footer">
+                    {{Form::button('Törlés',array('type'=>'button','class'=>'btn btn-danger btn-sm','id'=>'deleteButton'))}}
                 </div>
             </div>
 

@@ -49,7 +49,6 @@ class PageController extends \BaseController {
 
             $rules = array(
                 'title' => 'required|unique:pages',
-                'menu' => 'required|unique:pages',
                 'content' => 'required'
             );
 

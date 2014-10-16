@@ -14,6 +14,9 @@ use Response;
 use Exception;
 use Input;
 use Str;
+use URL;
+use Validator;
+use Redirect;
 
 class MenuController extends \BaseController
 {
@@ -52,63 +55,81 @@ class MenuController extends \BaseController
      */
     public function store()
     {
-        $menuItem = new MenuItem();
 
+        $rules = array(
+            'name' => 'required|unique:menuitem',
+        );
+
+        $validation = Validator::make(Input::all(), $rules);
+
+        if ($validation->fails()) {
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        }
+
+        $menuItem = new MenuItem();
 
         if (Input::has('type')) {
             switch (Input::get('type')) {
                 case 'fooldal':
-                    $generatedUrl = '/';
+                    $generatedUrl = URL::route('fooldal', array(), false);
                     break;
                 case 'kulso-hivatkozas':
                     $generatedUrl = Input::get('url');
                     break;
                 case 'bejegyzesek':
-                    if (false) {
-                        $generatedUrl = route('hirek.index');
+                    if (intval(Input::get('articleTag')) > 0) {
+                        $tag = Tag::find(Input::get('articleTag'));
+                        $generatedUrl = URL::route('hirek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)), false);
                     } else {
-                        $tag = Tag::find(Input::get('tag'));
-                        $generatedUrl = route('hirek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
+                        $generatedUrl = URL::route('hirek.index', array(), false);
                     }
                     break;
                 case 'egy-bejegyzes':
                     $article = Article::find(Input::get('article_id'));
-                    $generatedUrl = route('hirek.show',array('id' => $article->id,'title'=>Str::slug($article->title)));
+                    $generatedUrl = URL::route('hirek.show', array('id' => $article->id, 'title' => Str::slug($article->title)), false);
                     break;
                 case 'esemenyek':
-                    if (false) {
-                        $generatedUrl = route('esemenyek.index');
+                    if (intval(Input::get('eventTag')) > 0) {
+                        $tag = Tag::find(Input::get('eventTag'));
+                        $generatedUrl = URL::route('esemenyek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)), false);
                     } else {
-                        $tag = Tag::find(Input::get('tag'));
-                        $generatedUrl = route('esemenyek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
+                        $generatedUrl = URL::route('esemenyek.index', array(), false);
                     }
                     break;
                 case 'egy-esemeny':
                     $event = Event::find(Input::get('event_id'));
-                    $generatedUrl = route('esemenyek.show',array('id' => $event->id,'title'=>Str::slug($event->title)));
+                    $generatedUrl = URL::route('esemenyek.show', array('id' => $event->id, 'title' => Str::slug($event->title)), false);
                     break;
                 case 'galeriak':
-                    $generatedUrl = route('galeriak.index');
+                    $generatedUrl = URL::route('galeriak.index', array(), false);
                     break;
                 case 'egy-galeria':
                     $gallery = Gallery::find(Input::get('gallery_id'));
-                    $generatedUrl = route('galeriak.show',array('id' => $gallery->id,'title'=>Str::slug($gallery->name)));
+                    $generatedUrl = URL::route('galeriak.show', array('id' => $gallery->id, 'title' => Str::slug($gallery->name)), false);
                     break;
                 case 'egy-oldal':
                     $page = Page::find(Input::get('page_id'));
-                    $generatedUrl = route('oldalak.show',array('id' => $page->id,'title'=>Str::slug($page->title)));
+                    $generatedUrl = URL::route('oldalak.show', array('id' => $page->id, 'title' => Str::slug($page->title)), false);
                     break;
                 case 'dokumentumok':
-                    $generatedUrl = route('dokumentumok.index');
+                    $generatedUrl = URL::route('dokumentumok.index', array(), false);
                     break;
                 default:
                     break;
             }
         }
 
+        $menuItem->menu_id = Input::get('menu_id');
+        $menuItem->parent_id = Input::get('parent_id') != 0 ?: null;
+        $menuItem->name = Input::get('name');
+        $menuItem->type = Input::get('type');
         $menuItem->url = $generatedUrl;
 
-        dd($menuItem);
+        if ($menuItem->save()) {
+            return Redirect::back()->with('message', 'A menüpont feltöltése sikerült!');
+        } else {
+            return Redirect::back()->withInput()->withErrors('A menüpont feltöltése nem sikerült!');
+        }
     }
 
     /**
