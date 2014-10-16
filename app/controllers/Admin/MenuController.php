@@ -2,8 +2,12 @@
 
 namespace Admin;
 
+use Divide\CMS\Article;
+use Divide\CMS\Event;
+use Divide\CMS\Gallery;
 use Divide\CMS\Menu;
 use Divide\CMS\MenuItem;
+use Divide\CMS\Page;
 use Divide\Helper\Tag;
 use View;
 use Response;
@@ -31,12 +35,12 @@ class MenuController extends \BaseController
             ->with('menus', Menu::getMenus())
             ->with('parents', MenuItem::getMenuItems())
             ->with('types', MenuItem::types())
-            ->with('articleTags', MenuItem::types())
-            ->with('articles', MenuItem::types())
-            ->with('eventTags', MenuItem::types())
-            ->with('events', MenuItem::types())
-            ->with('galleries', MenuItem::types())
-            ->with('pages', MenuItem::types());
+            ->with('articleTags', Tag::getArray())
+            ->with('articles', Article::getArray())
+            ->with('eventTags', Tag::getArray())
+            ->with('events', Event::getArray())
+            ->with('galleries', Gallery::getGalleries())
+            ->with('pages', Page::getArray());
 
     }
 
@@ -54,47 +58,55 @@ class MenuController extends \BaseController
         if (Input::has('type')) {
             switch (Input::get('type')) {
                 case 'fooldal':
-                    $menuItem->url = '/';
+                    $generatedUrl = '/';
                     break;
                 case 'kulso-hivatkozas':
-                    $menuItem->url = Input::get('url');
+                    $generatedUrl = Input::get('url');
                     break;
                 case 'bejegyzesek':
                     if (false) {
-                        $menuItem->url = route('hirek.index');
+                        $generatedUrl = route('hirek.index');
                     } else {
-                        $tags = Tag::find(Input::get('tag'))->select(['id', 'slug']);
-                        $menuItem->url = route('hirek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
+                        $tag = Tag::find(Input::get('tag'));
+                        $generatedUrl = route('hirek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
                     }
                     break;
                 case 'egy-bejegyzes':
+                    $article = Article::find(Input::get('article_id'));
+                    $generatedUrl = route('hirek.show',array('id' => $article->id,'title'=>Str::slug($article->title)));
                     break;
                 case 'esemenyek':
                     if (false) {
-                        $menuItem->url = route('esemenyek.index');
+                        $generatedUrl = route('esemenyek.index');
                     } else {
-                        $tags = Tag::find(Input::get('tag'))->select(['id', 'slug']);
-                        $menuItem->url = route('esemenyek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
+                        $tag = Tag::find(Input::get('tag'));
+                        $generatedUrl = route('esemenyek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
                     }
                     break;
                 case 'egy-esemeny':
+                    $event = Event::find(Input::get('event_id'));
+                    $generatedUrl = route('esemenyek.show',array('id' => $event->id,'title'=>Str::slug($event->title)));
                     break;
                 case 'galeriak':
-                    $menuItem->url = route('galeriak.index');
+                    $generatedUrl = route('galeriak.index');
                     break;
                 case 'egy-galeria':
-                    $menuItem->url = route('galeriak.show');
+                    $gallery = Gallery::find(Input::get('gallery_id'));
+                    $generatedUrl = route('galeriak.show',array('id' => $gallery->id,'title'=>Str::slug($gallery->name)));
                     break;
                 case 'egy-oldal':
-                    $menuItem->url = route('oldalak.show');
+                    $page = Page::find(Input::get('page_id'));
+                    $generatedUrl = route('oldalak.show',array('id' => $page->id,'title'=>Str::slug($page->title)));
                     break;
                 case 'dokumentumok':
-                    $menuItem->url = route('dokumentumok.index');
+                    $generatedUrl = route('dokumentumok.index');
                     break;
                 default:
                     break;
             }
         }
+
+        $menuItem->url = $generatedUrl;
 
         dd($menuItem);
     }

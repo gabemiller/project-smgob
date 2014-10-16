@@ -41,7 +41,20 @@ class Document extends \Eloquent
         }
 
         return $ids;
+    }
 
+    /**
+     * @return array
+     */
+    public static function getArray()
+    {
+        $arr = array();
+
+        foreach (static::all(['id', 'name']) as $item) {
+            $arr[$item->id] = $item->name;
+        }
+
+        return $arr;
     }
 
 }

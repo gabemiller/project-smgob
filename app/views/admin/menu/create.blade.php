@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 {{Form::label('url', 'Külső hivatkozás',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::input('text','url','',array('class'=>'form-control','placeholder'=>'Külső hivatkozás'))}}
+                                    {{Form::input('text','url','',array('class'=>'form-control','placeholder'=>'Hivatkozás'))}}
                                 </div>
                             </div>
                         </div>
