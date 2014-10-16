@@ -19,13 +19,13 @@
                     <div class="form-group hidden">
                         {{Form::label('menu_id', 'Menü',array('class'=>'control-label'))}}
                         <div>
-                            {{Form::selection('menu_id', $menus,array('class'=>'form-control'))}}
+                            {{Form::select('menu_id', $menus,null,array('class'=>'form-control'))}}
                         </div>
                     </div>
                     <div class="form-group">
                         {{Form::label('parent_id', 'Szülő menüpont',array('class'=>'control-label'))}}
                         <div>
-                            {{Form::selection('parent_id', $parents,array('class'=>'form-control'))}}
+                            {{Form::select('parent_id', $parents,null,array('class'=>'form-control'))}}
                         </div>
                     </div>
                     <div class="form-group">
@@ -38,25 +38,19 @@
                     <div class="form-group">
                         {{Form::label('type', 'Típus',array('class'=>'control-label'))}}
                         <div>
-                            {{Form::selection('type', $types,array('class'=>'form-control'))}}
+                            {{Form::select('type', $types,null,array('class'=>'form-control'))}}
                         </div>
                     </div>
 
                     <ul class="nav nav-tabs hidden" role="tablist">
-                        <li class="active"><a href="#menu-1" role="tab" data-toggle="tab">{{$types[1]}}</a></li>
-                        <li><a href="#menu-2" role="tab" data-toggle="tab">{{$types[2]}}</a></li>
-                        <li><a href="#menu-3" role="tab" data-toggle="tab">{{$types[3]}}</a></li>
-                        <li><a href="#menu-4" role="tab" data-toggle="tab">{{$types[4]}}</a></li>
-                        <li><a href="#menu-5" role="tab" data-toggle="tab">{{$types[5]}}</a></li>
-                        <li><a href="#menu-6" role="tab" data-toggle="tab">{{$types[6]}}</a></li>
-                        <li><a href="#menu-7" role="tab" data-toggle="tab">{{$types[7]}}</a></li>
-                        <li><a href="#menu-8" role="tab" data-toggle="tab">{{$types[8]}}</a></li>
-                        <li><a href="#menu-8" role="tab" data-toggle="tab">{{$types[9]}}</a></li>
+                        @foreach($types as $key => $value)
+                        <li><a href="#{{$key}}" role="tab" data-toggle="tab">{{$value}}</a></li>
+                        @endforeach
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active" id="menu-1"></div>
-                        <div class="tab-pane" id="menu-2">
+                        <div class="tab-pane active" id="fooldal"></div>
+                        <div class="tab-pane" id="kulso-hivatkozas">
                             <div class="form-group">
                                 {{Form::label('url', 'Külső hivatkozás',array('class'=>'control-label'))}}
                                 <div>
@@ -65,48 +59,54 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="menu-3">
+                        <div class="tab-pane" id="bejegyzesek">
                             <div class="form-group">
-                                {{Form::label('tag', 'Címke',array('class'=>'control-label'))}}
+                                {{Form::label('tag', 'Bejegyzés címke',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::selection('tag', $types,array('class'=>'form-control'))}}
+                                    {{Form::select('tag', $articleTags,null,array('class'=>'form-control'))}}
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="menu-4">
+                        <div class="tab-pane" id="egy-bejegyzes">
                             <div class="form-group">
                                 {{Form::label('article_id', 'Bejegyzés',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::selection('article_id', $types,array('class'=>'form-control'))}}
+                                    {{Form::select('article_id', $articles,null,array('class'=>'form-control'))}}
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="menu-5">
+                        <div class="tab-pane" id="esemenyek">
                             <div class="form-group">
-                                {{Form::label('tag', 'Címke',array('class'=>'control-label'))}}
+                                {{Form::label('tag', 'Esemény címke',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::selection('tag', $types,array('class'=>'form-control'))}}
+                                    {{Form::select('tag', $eventTags,null,array('class'=>'form-control'))}}
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="menu-6">
+                        <div class="tab-pane" id="egy-esemeny">
                             <div class="form-group">
                                 {{Form::label('event_id', 'Esemény',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::selection('event_id', $types,array('class'=>'form-control'))}}
+                                    {{Form::select('event_id', $events,null,array('class'=>'form-control'))}}
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="menu-7"></div>
-                        <div class="tab-pane" id="menu-8">
+                        <div class="tab-pane" id="galeriak"></div>
+                        <div class="tab-pane" id="egy-galeria">
                             <div class="form-group">
                                 {{Form::label('gallery_id', 'Galéria',array('class'=>'control-label'))}}
                                 <div>
-                                    {{Form::selection('gallery_id', $types,array('class'=>'form-control'))}}
+                                    {{Form::select('gallery_id', $galleries,null,array('class'=>'form-control'))}}
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="menu-9"></div>
+                        <div class="tab-pane" id="egy-oldal">
+                            {{Form::label('page_id', 'Oldal',array('class'=>'control-label'))}}
+                            <div>
+                                {{Form::select('page_id', $pages,null,array('class'=>'form-control'))}}
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="dokumentumok"></div>
                     </div>
 
                 </div>

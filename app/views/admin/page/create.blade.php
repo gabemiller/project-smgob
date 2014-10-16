@@ -39,7 +39,7 @@
                     <div class="form-group">
                         {{Form::label('gallery', 'Hozzárendelt galéria',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-2">
-                            {{Form::selection('gallery', $galleries,array('class'=>'form-control'));}} 
+                            {{Form::select('gallery', $galleries,null,array('class'=>'form-control'));}}
                         </div>
                     </div>
                     <div class="form-group">

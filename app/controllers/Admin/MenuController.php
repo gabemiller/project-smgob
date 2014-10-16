@@ -4,10 +4,12 @@ namespace Admin;
 
 use Divide\CMS\Menu;
 use Divide\CMS\MenuItem;
+use Divide\Helper\Tag;
 use View;
 use Response;
 use Exception;
 use Input;
+use Str;
 
 class MenuController extends \BaseController
 {
@@ -28,7 +30,14 @@ class MenuController extends \BaseController
             ->with('menuItems', MenuItem::all())
             ->with('menus', Menu::getMenus())
             ->with('parents', MenuItem::getMenuItems())
-            ->with('types', MenuItem::types());
+            ->with('types', MenuItem::types())
+            ->with('articleTags', MenuItem::types())
+            ->with('articles', MenuItem::types())
+            ->with('eventTags', MenuItem::types())
+            ->with('events', MenuItem::types())
+            ->with('galleries', MenuItem::types())
+            ->with('pages', MenuItem::types());
+
     }
 
     /**
@@ -41,31 +50,49 @@ class MenuController extends \BaseController
     {
         $menuItem = new MenuItem();
 
-        dd(Input::all());
+
         if (Input::has('type')) {
             switch (Input::get('type')) {
-                case 1:
+                case 'fooldal':
                     $menuItem->url = '/';
                     break;
-                case 2:
+                case 'kulso-hivatkozas':
                     $menuItem->url = Input::get('url');
                     break;
-                case 3:
+                case 'bejegyzesek':
+                    if (false) {
+                        $menuItem->url = route('hirek.index');
+                    } else {
+                        $tags = Tag::find(Input::get('tag'))->select(['id', 'slug']);
+                        $menuItem->url = route('hirek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
+                    }
                     break;
-                case 4:
+                case 'egy-bejegyzes':
                     break;
-                case 5:
+                case 'esemenyek':
+                    $tags = Tag::find(Input::get('tag'))->select(['id', 'slug']);
+                    $menuItem->url = route('esemenyek.tag', array('id' => $tag->id, 'tagSlug' => Str::slug($tag->slug)));
                     break;
-                case 6:
+                case 'egy-esemeny':
                     break;
-                case 7:
+                case 'galeriak':
+                    $menuItem->url = route('galeriak.index');
                     break;
-                case 8:
+                case 'egy-galeria':
+                    $menuItem->url = route('galeriak.show');
                     break;
-                case 9:
+                case 'egy-oldal':
+                    $menuItem->url = route('oldalak.show');
+                    break;
+                case 'dokumentumok':
+                    $menuItem->url = route('dokumentumok.index');
+                    break;
+                default:
                     break;
             }
         }
+
+        dd($menuItem);
     }
 
     /**

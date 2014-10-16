@@ -17,25 +17,32 @@ Route::pattern('tagSlug', '[0-9A-z_-]+');
  *
  */
 
-Route::get('/', ['uses' => 'Site\HomeController@index', 'as' => 'fooldal']);
+Route::group(array('namespace' => 'Site'), function () {
 
-Route::get('hirek/{id}/{title}', ['uses' => 'Site\ArticleController@show', 'as' => 'hirek.show']);
+    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'fooldal']);
 
-Route::get('hirek/cimke/{id}/{tagSlug}', ['uses' => 'Site\ArticleController@tag', 'as' => 'hirek.tag']);
+    Route::get('hirek', ['uses' => 'HomeController@index', 'as' => 'hirek.index']);
 
-Route::get('esemenyek', ['uses' => 'Site\EventController@index', 'as' => 'esemenyek.index']);
+    Route::get('hirek/{id}/{title}', ['uses' => 'ArticleController@show', 'as' => 'hirek.show']);
 
-Route::get('esemenyek/{id}/{title}', ['uses' => 'Site\EventController@show', 'as' => 'esemenyek.show']);
+    Route::get('hirek/cimke/{id}/{tagSlug}', ['uses' => 'ArticleController@tag', 'as' => 'hirek.tag']);
 
-Route::get('esemenyek/cimke/{id}/{tagSlug}', ['uses' => 'Site\EventController@tag', 'as' => 'esemenyek.tag']);
+    Route::get('esemenyek', ['uses' => 'EventController@index', 'as' => 'esemenyek.index']);
 
-Route::get('galeriak', ['uses' => 'Site\GalleryController@index', 'as' => 'galeriak.index']);
+    Route::get('esemenyek/{id}/{title}', ['uses' => 'EventController@show', 'as' => 'esemenyek.show']);
 
-Route::get('galeriak/{id}/{title}', ['uses' => 'Site\GalleryController@show', 'as' => 'galeriak.show']);
+    Route::get('esemenyek/cimke/{id}/{tagSlug}', ['uses' => 'EventController@tag', 'as' => 'esemenyek.tag']);
 
-Route::get('oldal/{id}/{title}', ['uses' => 'Site\PageController@show', 'as' => 'oldalak.show']);
+    Route::get('galeriak', ['uses' => 'Site\GalleryController@index', 'as' => 'galeriak.index']);
 
-Route::match(['GET', 'POST'], 'dokumentumok', ['uses' => 'Site\DocumentController@index', 'as' => 'dokumentumok.index']);
+    Route::get('galeriak/{id}/{title}', ['uses' => 'GalleryController@show', 'as' => 'galeriak.show']);
+
+    Route::get('oldal/{id}/{title}', ['uses' => 'PageController@show', 'as' => 'oldalak.show']);
+
+    Route::match(['GET', 'POST'], 'dokumentumok', ['uses' => 'DocumentController@index', 'as' => 'dokumentumok.index']);
+
+});
+
 
 /**
  * -----------------------------------------------------------------------------

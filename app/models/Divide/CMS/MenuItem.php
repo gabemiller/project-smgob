@@ -47,22 +47,24 @@ class MenuItem extends \Eloquent
      */
     public static function types()
     {
-        return array(1 => 'Főoldal',
-            2 => 'Külső hivatkozás',
-            3 => 'Bejegyzések',
-            4 => 'Egy bejegyzés',
-            5 => 'Események',
-            6 => 'Egy esemény',
-            7 => 'Galériák',
-            8 => 'Egy galéria',
-            9 => 'Dokumentumok');
+        return array('fooldal' => 'Főoldal',
+            'kulso-hivatkozas' => 'Külső hivatkozás',
+            'bejegyzesek' => 'Bejegyzések',
+            'egy-bejegyzes' => 'Egy bejegyzés',
+            'esemenyek' => 'Események',
+            'egy-esemeny' => 'Egy esemény',
+            'galeriak' => 'Galériák',
+            'egy-galeria' => 'Egy galéria',
+            'egy-oldal' => 'Egy oldal',
+            'dokumentumok' => 'Dokumentumok');
     }
 
     /**
      * @param int $id
      * @return array
      */
-    public static function getMenuItems($id = 0) {
+    public static function getMenuItems($id = 0)
+    {
 
         $menuItems = array(0 => 'Nincs szülőmenüpont');
 
