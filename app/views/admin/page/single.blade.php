@@ -1,8 +1,6 @@
 <tr>
     <td class="text-center">
-        @if(!$page->hasChildren())
         {{Form::input('checkbox','delete',$page->id,array('data-url'=> URL::route('admin.oldal.destroy',array('id'=>$page->id))))}}
-        @endif
     </td>
     <td>{{$page->id}}</td>
     <td>{{$page->title}}</td>

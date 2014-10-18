@@ -141,7 +141,12 @@ class MenuController extends \BaseController
      */
     public function edit($id)
     {
-        //
+        View::share('title', 'Menüpont szerkesztése');
+
+        $this->layout->content = View::make('admin.menu.edit')
+            ->with('menus', Menu::getMenus())
+            ->with('parents', MenuItem::getMenuItems())
+            ->with('menuItem', MenuItem::find($id));
     }
 
     /**
@@ -165,7 +170,22 @@ class MenuController extends \BaseController
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            $menuItem = MenuItem::find($id);
+
+            if ($menuItem->delete()) {
+                return Response::json(['message' => 'A(z) ' . $id . ' azonosítójú menüpont törlése sikerült!', 'status' => true]);
+            } else {
+                return Response::json(['message' => 'A(z) ' . $id . ' azonosítójú menüpont törlése nem sikerült!', 'status' => false]);
+            }
+        } catch (Exception $e) {
+            if (Config::get('app.debug')) {
+                return Response::json(['message' => $e->getMessage(), 'status' => false]);
+            } else {
+                return Response::json(['message' => 'A(z) ' . $id . ' azonosítójú menüpont törlése nem sikerült!', 'status' => false]);
+            }
+        }
     }
 
 }

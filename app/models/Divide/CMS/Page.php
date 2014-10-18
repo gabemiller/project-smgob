@@ -69,17 +69,6 @@ class Page extends \Eloquent {
     }
 
     /**
-     * 
-     */
-    public function hasChildren() {
-        if (Page::where('parent', '=', $this->id)->count() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * @return array
      */
     public static function getArray()

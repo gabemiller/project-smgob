@@ -33,7 +33,8 @@ class GalleryController extends \BaseController
     {
         View::share('title', 'Galériák');
 
-        $this->layout->content = View::make('admin.gallery.index')->with('galleries', Gallery::all(['id', 'name', 'created_at']));
+        $this->layout->content = View::make('admin.gallery.index')
+            ->with('galleries', Gallery::all(['id', 'name', 'created_at']));
     }
 
     /**
@@ -76,7 +77,7 @@ class GalleryController extends \BaseController
             $gallery->description = Input::get('description');
 
             if ($gallery->save()) {
-                return Redirect::to('admin/galeria/kep/' . $gallery->id . '/upload')->with('message', 'A galéria feltöltése sikerült!');
+                return Redirect::route('admin.galeria.kep.upload',array('id'=>$gallery->id))->with('message', 'A galéria feltöltése sikerült!');
             } else {
                 return Redirect::back()->withInput()->withErrors('A galéria feltöltése nem sikerült!');
             }

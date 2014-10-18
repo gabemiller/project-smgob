@@ -23,6 +23,7 @@
                     <h3 class="box-title">Hír módosítása</h3>
                 </div>
                 <div class="box-body">
+
                     <div class="form-group">
                         {{Form::label('title', 'Cím',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
@@ -55,9 +56,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{Form::label('gallery', 'Hozzárendelt galéria',array('class'=>'col-lg-2 control-label'))}}
+                        {{Form::label('gallery_id', 'Hozzárendelt galéria',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-2">
-                            {{Form::selection('gallery', $galleries,array('class'=>'form-control'),$article->getGalleryId());}} 
+                            {{Form::select('gallery_id', $galleries,$article->getGalleryId(),array('class'=>'form-control'))}}
                         </div>
                     </div>
                 </div>

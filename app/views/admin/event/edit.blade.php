@@ -65,7 +65,7 @@
                     <div class="form-group">
                         {{Form::label('gallery', 'Hozzárendelt galéria',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-2">
-                            {{Form::selection('gallery', $galleries,array('class'=>'form-control'),$event->getGalleryId());}} 
+                            {{Form::select('gallery',$galleries, $event->getGalleryId(),array('class'=>'form-control'))}}
                         </div>
                     </div>
                 </div>

@@ -6,11 +6,16 @@
 </section>
 
 <section class="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            @include('_backend.message')
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-xs-12">
             
-            @include('_backend.message')
-
             {{Form::open(array('url' => URL::route('admin.oldal.store'),'class'=>'form-horizontal','method'=>'POST'))}}
             <div class="box box-solid">
                 <div class="box-body">

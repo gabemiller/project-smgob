@@ -70,8 +70,7 @@ class ArticleController extends \BaseController {
             $article->author_id = Input::get('author_id');
             $article->content = Input::get('content');
             $article->published = Input::get('published') ? true : false;
-            $article->gallery_id = is_numeric(Input::get('gallery')) ? Input::get('gallery') : 0;
-
+            $article->gallery_id = intval(Input::get('gallery')) > 0 ? Input::get('gallery') : null;
 
 
             if ($article->save()) {
@@ -114,7 +113,8 @@ class ArticleController extends \BaseController {
     public function edit($id) {
         View::share('title', 'Hír módosítása');
 
-        $this->layout->content = View::make('admin.article.edit')->with('article', Article::find($id))->with('galleries', Gallery::getGalleries());
+        $this->layout->content = View::make('admin.article.edit')
+            ->with('article', Article::find($id))->with('galleries', Gallery::getGalleries());
     }
 
     /**
@@ -147,7 +147,7 @@ class ArticleController extends \BaseController {
             $article->author_id = Input::get('author_id');
             $article->content = Input::get('content');
             $article->published = Input::get('published') ? true : false;
-            $article->gallery_id = is_numeric(Input::get('gallery')) ? Input::get('gallery') : 0;
+            $article->gallery_id = intval(Input::get('gallery_id')) > 0 ? Input::get('gallery_id') : null;
             $article->retag(explode(',', Input::get('tags')));
 
             if ($article->save()) {

@@ -26,7 +26,8 @@ class DocumentController extends \BaseController {
     public function index() {
         View::share('title', 'Dokumentumok');
 
-        $this->layout->content = View::make('admin.document.index')->with('documents', Document::all(['id', 'name','path', 'created_at','updated_at']));
+        $this->layout->content = View::make('admin.document.index')
+            ->with('documents', Document::all(['id', 'name','path', 'created_at','updated_at']));
     }
 
     /**
@@ -38,7 +39,8 @@ class DocumentController extends \BaseController {
     public function create() {
         View::share('title', 'Új dokumentum');
 
-        $this->layout->content = View::make('admin.document.create')->with('categories',DocumentCategory::getCategories());
+        $this->layout->content = View::make('admin.document.create')
+            ->with('categories',DocumentCategory::getCategories());
     }
 
     /**
@@ -122,7 +124,10 @@ class DocumentController extends \BaseController {
         $doc = Document::find($id);
         View::share('title', 'Dokumentum szerkesztése: ' . $doc->name);
 
-        $this->layout->content = View::make('admin.document.edit')->with('document', $doc)->with('catIds',$doc->getCategoryIds())->with('categories',DocumentCategory::getCategories());
+        $this->layout->content = View::make('admin.document.edit')
+            ->with('document', $doc)
+            ->with('catIds',$doc->getCategoryIds())
+            ->with('categories',DocumentCategory::getCategories());
     }
 
     /**
