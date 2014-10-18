@@ -63,6 +63,7 @@ class PageController extends \BaseController {
             $page->title = Input::get('title');
             $page->content = Input::get('content');
             $page->gallery_id = intval(Input::get('gallery_id')) > 0 ? Input::get('gallery_id') : null;
+            $page->published = Input::get('published') ? true : false;
 
             if ($page->save()) {
                 return Redirect::back()->with('message', 'Az oldal létrehozása sikerült!');
@@ -129,6 +130,7 @@ class PageController extends \BaseController {
             $page->title = Input::get('title');
             $page->content = Input::get('content');
             $page->gallery_id = intval(Input::get('gallery_id')) > 0 ? Input::get('gallery_id') : null;
+            $page->published = Input::get('published') ? true : false;
 
             if ($page->save()) {
                 return Redirect::back()->with('message', 'Az oldal módosítása sikerült!');

@@ -3,6 +3,8 @@
 namespace Divide\CMS;
 
 use Str;
+use URL;
+use Date;
 
 /**
  * Divide\CMS\Article
@@ -59,12 +61,21 @@ class Article extends \Eloquent
     }
 
     /**
-     *
-     * @return type
+     * @param string $format
+     * @return string
      */
-    public function getCreateDate()
+    public function getCreatedAt($format = 'Y. F j., l H:i')
     {
-        return substr(str_replace('-', '.', $this->created_at), 0, 16);
+        return (new Date($this->created_at))->format($format);
+    }
+
+    /**
+     * @param string $format
+     * @return string
+     */
+    public function getUpdatedAt($format = 'Y. F j., l H:i')
+    {
+        return (new Date($this->updated_at))->format($format);
     }
 
     /**
@@ -84,7 +95,7 @@ class Article extends \Eloquent
      */
     public function getLink()
     {
-        return 'hirek/' . $this->id . '/' . Str::slug($this->title);
+        return URL::route('hirek.show',array('id'=>$this->id,'title'=>Str::slug($this->title)));
     }
 
     /**

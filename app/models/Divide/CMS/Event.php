@@ -69,4 +69,22 @@ class Event extends \Eloquent {
         return $arr;
     }
 
+    /**
+     * @param string $format
+     * @return string
+     */
+    public function getCreatedAt($format = 'Y. F j., l H:i')
+    {
+        return (new Date($this->created_at))->format($format);
+    }
+
+    /**
+     * @param string $format
+     * @return string
+     */
+    public function getUpdatedAt($format = 'Y. F j., l H:i')
+    {
+        return (new Date($this->updated_at))->format($format);
+    }
+
 }

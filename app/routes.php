@@ -189,8 +189,17 @@ if (Request::is('admin') || Request::is('admin/*')) {
         /**
          * Oldal menüpont
          */
-        $menu->add('<i class="fa fa-file-text-o"></i> Oldalak',
-            ['route' => 'admin.oldal.index']);
+        $menu->add('Oldal', ['class' => 'treeview'])
+            ->append('<i class="fa pull-right fa-angle-left"></i>')
+            ->prepend('<i class="fa fa-file-text-o"></i> ');
+
+        $menu->get('oldal')->add('Új oldal',
+            ['route' => 'admin.oldal.create'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
+
+        $menu->get('oldal')->add('Összes oldal',
+            ['route' => 'admin.oldal.index'])
+            ->prepend('<i class="fa fa-angle-double-right "></i> ');
 
         /**
          * Menükezelő menüpont

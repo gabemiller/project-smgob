@@ -68,4 +68,6 @@ class DocumentCategory extends \Eloquent {
         return $array;
     }
 
+
+
 }

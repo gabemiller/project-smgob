@@ -158,7 +158,19 @@ class MenuController extends \BaseController
      */
     public function update($id)
     {
-        //
+        $rules = array(
+            'name' => 'required|unique:menuitem',
+        );
+
+        $validation = Validator::make(Input::all(), $rules);
+
+        if ($validation->fails()) {
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        }
+
+        $menuItem = MenuItem::findOrFail($id);
+
+        //TODO write update MenuItem
     }
 
     /**
