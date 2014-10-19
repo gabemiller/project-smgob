@@ -20,6 +20,8 @@ class CreateDocumentcategoryTable extends Migration
             $table->integer('parent_id');
             // Kategória név
             $table->string('name');
+            // Kategória ékezetes és egyéb speciális karakter nélküli neve
+            $table->string('slug');
             // Létrehozva
             // Frissítve
             $table->timestamps();

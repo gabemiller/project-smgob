@@ -18,26 +18,27 @@ class DocumentController extends \BaseController
      *
      * @return Response
      */
-    public function index()
+    public function index($category = null)
     {
         View::share('title', 'Dokumentumok');
 
-        if (Input::has('category')) {
-            $catId = Input::get('category');
+        if (isset($category)) {
 
-            $doc = Document::whereHas('categories', function($q) use($catId)
-            {
-                $q->where('documentcategory_id', '=', $catId);
+            $cat = DocumentCategory::where('slug','=',$category)->first();
+
+            $doc = Document::whereHas('categories', function ($q) use($cat) {
+                $q->where('documentcategory_id', '=', $cat->id);
 
             })->get();
 
 
         } else {
             $doc = Document::all();
-            $catId = 0;
         }
 
-        $this->layout->content = View::make('site.document.index')->with('documents', $doc)->with('categories', DocumentCategory::getCategoriesforPublic())->with('catId',$catId);
+        $this->layout->content = View::make('site.document.index')
+            ->with('documents', $doc)
+            ->with('categories', DocumentCategory::all(['id','name','slug']));
     }
 
 }

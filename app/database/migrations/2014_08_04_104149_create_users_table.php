@@ -26,9 +26,9 @@ class CreateUsersTable extends Migration {
     public function down() {
         Schema::table('users', function($table) {
 
-            if (Schema::hasColumn('phone', 'deletable')) {
+            //if ($table->hasColumn('phone', 'deletable')) {
                 $table->dropColumn(['phone', 'deletable']);
-            }
+            //}
         });
     }
 

@@ -7,6 +7,7 @@
 Route::pattern('title', '[0-9A-z_-]+');
 Route::pattern('id', '[0-9]+');
 Route::pattern('tagSlug', '[0-9A-z_-]+');
+Route::pattern('categoryí', '[0-9A-z_-]+');
 
 /**
  * -----------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::group(array('namespace' => 'Site'), function () {
 
     Route::get('oldal/{id}/{title}', ['uses' => 'PageController@show', 'as' => 'oldalak.show']);
 
-    Route::match(['GET', 'POST'], 'dokumentumok', ['uses' => 'DocumentController@index', 'as' => 'dokumentumok.index']);
+    Route::get('dokumentumok/{category?}', ['uses' => 'DocumentController@index', 'as' => 'dokumentumok.index']);
 
 });
 
@@ -56,8 +57,11 @@ if (!Request::is('admin') && !Request::is('admin/*')) {
 
     Menu::make('mainMenu', function ($menu) {
 
-        \Divide\CMS\MenuItem::generateMenu($menu,null);
+        try {
+            \Divide\CMS\MenuItem::generateMenu($menu, null);
+        } catch(\Exception $ex){
 
+        }
     });
 }
 

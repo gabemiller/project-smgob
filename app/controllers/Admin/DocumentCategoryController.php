@@ -52,6 +52,7 @@ class DocumentCategoryController extends \BaseController {
             $docCat = new DocumentCategory();
 
             $docCat->name = Input::get('name');
+            $docCat->slug = Str::slug(Input::get('name'));
             $docCat->parent_id = is_numeric(Input::get('parent_id')) ? Input::get('parent_id') : null;
 
 
@@ -118,6 +119,7 @@ class DocumentCategoryController extends \BaseController {
             $docCat = DocumentCategory::findOrFail($id);
 
             $docCat->name = Input::get('name');
+            $docCat->slug = Str::slug(Input::get('name'));
             $docCat->parent_id = is_numeric(Input::get('parent_id')) ? Input::get('parent_id') : null;
 
 
