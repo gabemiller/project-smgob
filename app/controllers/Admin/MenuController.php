@@ -57,7 +57,7 @@ class MenuController extends \BaseController
     {
 
         $rules = array(
-            'name' => 'required|unique:menuitem',
+            'name' => 'required',
         );
 
         $validation = Validator::make(Input::all(), $rules);
@@ -120,7 +120,7 @@ class MenuController extends \BaseController
         }
 
         $menuItem->menu_id = Input::get('menu_id');
-        $menuItem->parent_id = Input::get('parent_id') != 0 ?: null;
+        $menuItem->parent_id = intval(Input::get('parent_id')) > 0 ? Input::get('parent_id') : null;
         $menuItem->name = Input::get('name');
         $menuItem->type = Input::get('type');
         $menuItem->url = $generatedUrl;
@@ -159,7 +159,7 @@ class MenuController extends \BaseController
     public function update($id)
     {
         $rules = array(
-            'name' => 'required|unique:menuitem',
+            'name' => 'required',
         );
 
         $validation = Validator::make(Input::all(), $rules);

@@ -34,7 +34,7 @@ Route::group(array('namespace' => 'Site'), function () {
 
     Route::get('esemenyek/cimke/{id}/{tagSlug}', ['uses' => 'EventController@tag', 'as' => 'esemenyek.tag']);
 
-    Route::get('galeriak', ['uses' => 'Site\GalleryController@index', 'as' => 'galeriak.index']);
+    Route::get('galeriak', ['uses' => 'GalleryController@index', 'as' => 'galeriak.index']);
 
     Route::get('galeriak/{id}/{title}', ['uses' => 'GalleryController@show', 'as' => 'galeriak.show']);
 

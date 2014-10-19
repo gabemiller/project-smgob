@@ -1,6 +1,7 @@
 <?php
 
 namespace Divide\CMS;
+
 use URL;
 use Str;
 
@@ -39,7 +40,7 @@ class MenuItem extends \Eloquent
      */
     public function parent()
     {
-        return $this->hasOne('Divide\CMS\MenuItem', 'parent_id', 'id');
+        return $this->hasOne('Divide\CMS\MenuItem', 'id', 'parent_id');
     }
 
     /**
@@ -47,7 +48,7 @@ class MenuItem extends \Eloquent
      */
     public function children()
     {
-        return $this->hasMany('Divide\CMS\MenuItem', 'id', 'parent_id');
+        return $this->hasMany('Divide\CMS\MenuItem', 'parent_id', 'id');
     }
 
     /**
@@ -74,10 +75,15 @@ class MenuItem extends \Eloquent
     public static function getMenuItems($id = 0)
     {
 
-        $menuItems = array(0 => 'Nincs szülőmenüpont');
+        $menuItems = array(0 => 'Nincs szülőmenüpont!');
 
-        foreach (static::where('id', '<>', $id)->get(['id', 'name']) as $menuItem) {
-            $menuItems[$menuItem->id] = $menuItem->name;
+        foreach (static::where('id', '<>', $id)->get(['id', 'parent_id', 'name']) as $menuItem) {
+
+            if ($menuItem->parent) {
+                $menuItems[$menuItem->id] = $menuItem->parent->name . ' > ' . $menuItem->name;
+            } else {
+                $menuItems[$menuItem->id] = $menuItem->name;
+            }
         }
 
         return $menuItems;
@@ -87,7 +93,8 @@ class MenuItem extends \Eloquent
      * @param $menu
      * @param $id
      */
-    public static function generateMenu($menu, $id) {
+    public static function generateMenu($menu, $id)
+    {
         $menuItems = MenuItem::where('parent_id', '=', $id)->get();
 
         if ($id == null) {
