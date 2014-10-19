@@ -30,8 +30,7 @@ class CreateMenuitemTable extends Migration {
             $table->integer('order')->unsigned();
 			$table->timestamps();
 
-            // Unique, Foreign key
-            $table->unique(['name']);
+            // Foreign key
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->foreign('parent_id')->references('id')->on('menuitem')->onDelete('cascade');
 		});

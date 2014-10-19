@@ -21,7 +21,7 @@ class Document extends \Eloquent
     protected $table = 'document';
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories()
     {
@@ -59,7 +59,7 @@ class Document extends \Eloquent
 
     /**
      * @param string $format
-     * @return string
+     * @return mixed
      */
     public function getCreatedAt($format = 'Y. F j., l H:i')
     {
@@ -68,7 +68,7 @@ class Document extends \Eloquent
 
     /**
      * @param string $format
-     * @return string
+     * @return mixed
      */
     public function getUpdatedAt($format = 'Y. F j., l H:i')
     {

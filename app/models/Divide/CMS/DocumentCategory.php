@@ -13,24 +13,28 @@ class DocumentCategory extends \Eloquent {
     protected $table = 'documentcategory';
 
     /**
-     *
-     * @var type 
+     * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['parent_id','name','slug'];
 
     /**
-     * 
-     * @return type
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function documents() {
         return $this->belongsToMany('Divide\CMS\Document', 'document_documentcategory', 'documentcategory_id', 'document_id');
     }
 
     /**
-     * 
-     * @return type
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function ancestor() {
+    public function parent() {
+        return $this->belongsTo('Divide\CMS\DocumentCategory', 'id', 'parent');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function children() {
         return $this->belongsTo('Divide\CMS\DocumentCategory', 'id', 'parent');
     }
 
