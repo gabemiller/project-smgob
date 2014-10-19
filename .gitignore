@@ -1,8 +1,5 @@
 app/config/developement
 app/config/testing
-app/views/site
-app/views/index.blade.php
-app/views/_frontend
 app/assets
 nbproject
 .idea
