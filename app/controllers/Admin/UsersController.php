@@ -325,11 +325,11 @@ class UsersController extends \BaseController {
             $thumbPath = $path . '/thumb';
 
             if (!File::exists(public_path() . $path)) {
-                File::makeDirectory(public_path() . $path, 777, true);
+                File::makeDirectory(public_path() . $path, 0777, true);
             }
 
             if (!File::exists(public_path() . $thumbPath)) {
-                File::makeDirectory(public_path() . $thumbPath, 777, true);
+                File::makeDirectory(public_path() . $thumbPath, 0777, true);
             }
 
             $extension = Input::file('picture')->getClientOriginalExtension();
