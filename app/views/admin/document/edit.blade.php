@@ -45,7 +45,7 @@
                     <div class="form-group">
                         {{Form::label('category', 'Kategória',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-2">
-                          {{Form::selection('category[]', $categories,array('class'=>'form-control','multiple'=>'multiple'),$catIds)}}
+                          {{Form::select('category[]', $categories,$catIds,array('class'=>'form-control','multiple'=>'multiple'))}}
                         </div>
                     </div>
                 </div>
