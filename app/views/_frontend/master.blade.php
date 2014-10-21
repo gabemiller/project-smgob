@@ -36,7 +36,7 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             @yield('sidebar')
             <h4>Kövessen Facebookon!</h4>
-            <div class="fb-like-box" data-href="https://www.facebook.com/szentmiklosovi" data-colorscheme="light"
+            <div class="fb-like-box" data-href="https://www.facebook.com/szentmiklosgorkatovodaesbolcsode" data-colorscheme="light"
                  data-show-faces="true" data-header="false" data-show-border="false" data-width="292"></div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
