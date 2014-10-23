@@ -158,19 +158,35 @@ class MenuController extends \BaseController
      */
     public function update($id)
     {
-        $rules = array(
-            'name' => 'required',
-        );
+        try {
+            $rules = array(
+                'name' => 'required',
+            );
 
-        $validation = Validator::make(Input::all(), $rules);
+            $validation = Validator::make(Input::all(), $rules);
 
-        if ($validation->fails()) {
-            return Redirect::back()->withInput()->withErrors($validation->messages());
+            if ($validation->fails()) {
+                return Redirect::back()->withInput()->withErrors($validation->messages());
+            }
+
+            $menuItem = MenuItem::findOrFail($id);
+
+            $menuItem->parent_id = intval(Input::get('parent_id')) > 0 ? Input::get('parent_id') : null;
+            $menuItem->name = Input::get('name');
+
+            if ($menuItem->save()) {
+                return Redirect::back()->with('message', 'A menüpont módosítása sikerült!');
+            } else {
+                return Redirect::back()->withInput()->withErrors('A menüpont módosítása nem sikerült!');
+            }
+        } catch (Exception $e) {
+            if (Config::get('app.debug')) {
+                return Redirect::back()->withInput()->withErrors($e->getMessage());
+            } else {
+                return Redirect::back()->withInput()->withErrors('A menüpont módosítása nem sikerült!');
+            }
         }
 
-        $menuItem = MenuItem::findOrFail($id);
-
-        //TODO write update MenuItem
     }
 
     /**

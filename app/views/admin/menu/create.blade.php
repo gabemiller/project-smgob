@@ -40,7 +40,7 @@
                         {{Form::label('name', 'Név',array('class'=>'control-label'))}}
                         <div>
                             {{Form::input('text','name','',array('class'=>'form-control','placeholder'=>'Név'))}}
-                            <p class="help-block">A menüpont neve. Csak olyan név lehet, ami nem szerepel még az adatbázisban.</p>
+                            <p class="help-block">Ez lesz a menüpont neve.</p>
                         </div>
                     </div>
 
@@ -65,6 +65,7 @@
                                 {{Form::label('url', 'Külső hivatkozás',array('class'=>'control-label'))}}
                                 <div>
                                     {{Form::input('text','url','',array('class'=>'form-control','placeholder'=>'http://pelda.hu'))}}
+                                    <p class="help-block">A hivatkozás URL címét kell megadni.</p>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +74,7 @@
                                 {{Form::label('articleTag', 'Bejegyzés címke',array('class'=>'control-label'))}}
                                 <div>
                                     {{Form::select('articleTag', $articleTags,null,array('class'=>'form-control'))}}
+                                    <p class="help-block">Kiválaszthatunk egy adott címkében szereplő híreket, vagy az összes hírt.</p>
                                 </div>
                             </div>
                         </div>
@@ -81,6 +83,7 @@
                                 {{Form::label('article_id', 'Bejegyzés',array('class'=>'control-label'))}}
                                 <div>
                                     {{Form::select('article_id', $articles,null,array('class'=>'form-control'))}}
+                                    <p class="help-block">Egy bejegyzést választhatunk ki a címe alapján.</p>
                                 </div>
                             </div>
                         </div>
@@ -89,6 +92,7 @@
                                 {{Form::label('eventTag', 'Esemény címke',array('class'=>'control-label'))}}
                                 <div>
                                     {{Form::select('eventTag', $eventTags,null,array('class'=>'form-control'))}}
+                                    <p class="help-block">Kiválaszthatunk egy adott címkében szereplő eseményeket, vagy az összes eseménytt.</p>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +101,7 @@
                                 {{Form::label('event_id', 'Esemény',array('class'=>'control-label'))}}
                                 <div>
                                     {{Form::select('event_id', $events,null,array('class'=>'form-control'))}}
+                                    <p class="help-block">Egy eseményt választhatunk ki a címe alapján.</p>
                                 </div>
                             </div>
                         </div>
@@ -106,6 +111,7 @@
                                 {{Form::label('gallery_id', 'Galéria',array('class'=>'control-label'))}}
                                 <div>
                                     {{Form::select('gallery_id', $galleries,null,array('class'=>'form-control'))}}
+                                    <p class="help-block">Egy galériát választhatunk ki a címe alapján.</p>
                                 </div>
                             </div>
                         </div>
@@ -113,6 +119,7 @@
                             {{Form::label('page_id', 'Oldal',array('class'=>'control-label'))}}
                             <div>
                                 {{Form::select('page_id', $pages,null,array('class'=>'form-control'))}}
+                                <p class="help-block">Egy oldalt választhatunk ki a címe alapján.</p>
                             </div>
                         </div>
                         <div class="tab-pane" id="dokumentumok"></div>

@@ -6,8 +6,15 @@
 </section>
 
 <section class="content">
+
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            @include('_backend.message')
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             {{Form::open(array('url' => URL::route('admin.menu-kezelo.update',array('id'=>$menuItem->id)),'class'=>'form-horizontal','method'=>'PUT'))}}
             <div class="box box-solid">
@@ -39,7 +46,7 @@
                     <div class="form-group">
                         {{Form::label('name', 'Név',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
-                            {{Form::input('text','Név',$menuItem->name,array('class'=>'form-control','placeholder'=>'Név'))}}
+                            {{Form::input('text','name',$menuItem->name,array('class'=>'form-control','placeholder'=>'Név'))}}
                         </div>
                     </div>
                     <div class="form-group">
