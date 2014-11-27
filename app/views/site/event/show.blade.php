@@ -1,12 +1,18 @@
 @extend('_frontend.master')
+
+@section('page-title')
+<h1>{{HTML::link($event->getLink(),$event->title)}}</h1>
+@stop
+
 @section('breadcrumb')
 {{ HTML::decode(Breadcrumbs::render('esemenyek.show',$event)) }}
 @stop
+
+
 @section('content')
 
 <div class="event">
-    <h1>{{HTML::link($event->getLink(),$event->title)}}</h1>
-    <p class="small">Kezdés: {{$event->start}} | Befejezés: {{$event->end}} </p>
+    <p class="small">Kezdés: {{$event->getStartAt()}} | Befejezés: {{$event->getEndAt()}} </p>
     <div class="event-content">
         {{$event->content}}
     </div>
@@ -26,7 +32,6 @@
     </div>
     @endif
 
-    <h4>Hozzászólások</h4>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
