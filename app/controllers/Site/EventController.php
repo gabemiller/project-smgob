@@ -22,7 +22,7 @@ class EventController extends \BaseController {
         View::share('title', 'Események');
 
         //$events = Event::where('shows', '=', true)->orderBy('start', 'DESC')->select(['id', 'title', 'start', 'end', 'content'])->paginate(10);
-        $events = Event::whereRaw('published = ? ORDER BY start_at DESC', array(true))->paginate(10);
+        $events = Event::where('published','=',true)->orderBy('start_at','DESC')->paginate(10);
 
         $this->layout->content = View::make('site.event.index')->with('events', $events);
     }
@@ -53,7 +53,7 @@ class EventController extends \BaseController {
         
         View::share('title', 'Események: '.$tag->name);
         
-        $event = Event::withAnyTag($tag->name)->orderBy('created_at','desc')->paginate(10);
+        $event = Event::withAnyTag($tag->name)->where('published','=',true)->orderBy('start_at','desc')->paginate(10);
 
         $this->layout->content = View::make('site.event.tag')->with('events',$event)->with('tag',$tag);
     }
