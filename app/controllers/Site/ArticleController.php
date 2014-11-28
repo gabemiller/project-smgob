@@ -23,6 +23,8 @@ class ArticleController extends \BaseController {
         $article = Article::find($id);
         
         View::share('title', $article->title);
+
+
         
         $this->layout->content = View::make('site.article.show')->with('article', $article)->with('url',Request::url());
     }

@@ -12,7 +12,8 @@ use Validator;
 use Redirect;
 use Config;
 
-class ArticleController extends \BaseController {
+class ArticleController extends \BaseController
+{
 
     protected $layout = '_backend.master';
 
@@ -22,7 +23,8 @@ class ArticleController extends \BaseController {
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         View::share('title', 'Hírek');
 
         $this->layout->content = View::make('admin.article.index')->with('articles', Article::all(['id', 'author_id', 'title', 'created_at']));
@@ -34,7 +36,8 @@ class ArticleController extends \BaseController {
      *
      * @return Response
      */
-    public function create() {
+    public function create()
+    {
         View::share('title', 'Új hír');
 
         $this->layout->content = View::make('admin.article.create')->with('galleries', Gallery::getGalleries());
@@ -46,7 +49,8 @@ class ArticleController extends \BaseController {
      *
      * @return Response
      */
-    public function store() {
+    public function store()
+    {
 
 
         try {
@@ -94,10 +98,11 @@ class ArticleController extends \BaseController {
      * Display the specified resource.
      * GET /admin\article/{id}
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         View::share('title', 'Hír');
 
         $this->layout->content = View::make('admin.article.show');
@@ -107,10 +112,11 @@ class ArticleController extends \BaseController {
      * Show the form for editing the specified resource.
      * GET /admin\article/{id}/edit
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         View::share('title', 'Hír módosítása');
 
         $this->layout->content = View::make('admin.article.edit')
@@ -121,10 +127,11 @@ class ArticleController extends \BaseController {
      * Update the specified resource in storage.
      * PUT /admin\article/{id}
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function update($id) {
+    public function update($id)
+    {
 
         try {
 
@@ -148,7 +155,11 @@ class ArticleController extends \BaseController {
             $article->content = Input::get('content');
             $article->published = Input::get('published') ? true : false;
             $article->gallery_id = intval(Input::get('gallery_id')) > 0 ? Input::get('gallery_id') : null;
-            $article->retag(explode(',', Input::get('tags')));
+            if (strlen(Input::get('tags')) > 0) {
+                $article->retag(explode(',', Input::get('tags')));
+            } else {
+                $article->untag();
+            }
 
             if ($article->save()) {
                 return Redirect::back()->with('message', 'A hír módosítása sikerült!');
@@ -168,10 +179,11 @@ class ArticleController extends \BaseController {
      * Remove the specified resource from storage.
      * DELETE /admin\article/{id}
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         try {
 
             $article = Article::find($id);
