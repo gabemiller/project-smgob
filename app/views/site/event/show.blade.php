@@ -12,9 +12,24 @@
 @section('content')
 
 <div class="event">
-    <p class="small">Kezdés: {{$event->getStartAt()}} | Befejezés: {{$event->getEndAt()}} </p>
     <div class="event-content">
         {{$event->content}}
+    </div>
+
+    <div class="event-infos">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="event-info"><i class="fa fa-clock-o"></i> {{$event->getStartAt()}} - {{$event->getEndAt()}}</div>
+                <div class="event-info">
+                    @if(count($event->tagNames())>0)
+                        <i class="fa fa-tags"></i>
+                        @foreach(\Divide\Helper\Tag::getTagByName($event->tagNames()) as $tag)
+                            <span>{{HTML::linkRoute('esemenyek.tag',$tag->name,array('id'=>$tag->id,'tagSlug'=>\Str::slug($tag->slug)))}}</span>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
 
     @if(count($event->gallery)!=0 && count($event->gallery->pictures)!=0)

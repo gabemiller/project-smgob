@@ -12,17 +12,18 @@
         <div class="event list-box">
             <h3>{{HTML::link($event->getLink(),$event->title)}}</h3>
 
-            <p class="small">Kezdés: {{$event->start}} | Befejezés: {{$event->end}} </p>
+            <p class="article-datas">
+                <i class="fa fa-clock-o"></i> {{$event->getStartAt()}} - {{$event->getEndAt()}}
+
+            @if(count($event->tagNames()) > 0)
+                <i class="fa fa-tags"></i>
+                @foreach(\Divide\Helper\Tag::getTagByName($event->tagNames()) as $tag)
+                    <span>{{HTML::linkRoute('esemenyek.tag',$tag->name,array('id'=>$tag->id,'tagSlug'=>\Str::slug($tag->slug)))}}</span>
+                @endforeach
+            @endif
+            </p>
 
             <p class="text-justify">{{$event->getParragraph()}}</p>
-
-            <div class="tags">
-                @if(sizeof($event->tagNames()) > 0)
-                    @foreach(\Divide\Helper\Tag::getTagByName($event->tagNames()) as $tag)
-                        <span class="label label-banhorvati-blue">{{HTML::linkRoute('esemenyek.tag',$tag->name,array('id'=>$tag->id,'tagSlug'=>\Str::slug($tag->slug)))}}</span>
-                    @endforeach
-                @endif
-            </div>
         </div>
     @endforeach
 
