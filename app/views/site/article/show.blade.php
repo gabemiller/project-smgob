@@ -37,16 +37,16 @@
             <h4>Galéria</h4>
 
             <div class="article-gallery">
-                <ul class="row list-unstyled">
+                <div class="owl-carousel">
                     @foreach($article->gallery->pictures as $picture)
-                        <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                        <div>
                             <a href="{{$picture->picture_path}}" title="{{$picture->name}}" data-gallery>
                                 <img class="img-responsive" src="{{$picture->thumbnail_path}}" alt="{{$picture->name}}"
                                      title="{{$picture->name}}"/>
                             </a>
-                        </li>
+                        </div>
                     @endforeach
-                </ul>
+                </div>
             </div>
         @endif
 

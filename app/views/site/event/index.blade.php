@@ -12,7 +12,7 @@
         <div class="event list-box">
             <h3>{{HTML::link($event->getLink(),$event->title)}}</h3>
 
-            <p class="article-datas">
+            <p class="event-datas">
                 <i class="fa fa-clock-o"></i> {{$event->getStartAt()}} - {{$event->getEndAt()}}
 
             @if(count($event->tagNames()) > 0)
@@ -22,8 +22,6 @@
                 @endforeach
             @endif
             </p>
-
-            <p class="text-justify">{{$event->getParragraph()}}</p>
         </div>
     @endforeach
 
