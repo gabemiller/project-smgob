@@ -40,7 +40,7 @@
                     <div class="form-group">
                         {{Form::label('content', 'Tartalom',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
-                            {{Form::textarea('content',$article->content,array('id'=>'summernote-textarea'))}}
+                            {{Form::textarea('content',$article->content,array('class'=>'ckeditor'))}}
                         </div>
                     </div>
                     <div class="form-group">

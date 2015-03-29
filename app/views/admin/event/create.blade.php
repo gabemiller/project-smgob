@@ -1,4 +1,4 @@
-@extend('_backend.master')
+@extends('_backend.master')
 @section('content')
 <section class="content-header">
     <h1>Új esemény</h1>
@@ -47,7 +47,7 @@
                     <div class="form-group">
                         {{Form::label('content', 'Tartalom',array('class'=>'col-lg-2 control-label'))}}
                         <div class="col-lg-9">
-                            {{Form::textarea('content','',array('id'=>'summernote-textarea'))}}
+                            {{Form::textarea('content','',array('class'=>'ckeditor'))}}
                         </div>
                     </div>
                     <div class="form-group">
