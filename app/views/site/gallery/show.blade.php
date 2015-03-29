@@ -1,8 +1,4 @@
-@extend('_frontend.master')
-
-@section('page-title')
-    <h1>{{$gallery->name}}</h1>
-@stop
+@extends('_frontend.master')
 
 @section('breadcrumb')
     {{ HTML::decode(Breadcrumbs::render('galeriak.show',$gallery)) }}
@@ -11,8 +7,10 @@
 @section('content')
     <div class="gallery">
 
+        <h1 class="content-title">{{$gallery->name}}</h1>
+
         @if($gallery->description)
-            <h4>Leírás</h4>
+            <h2 class="content-subtitle-2">Leírás</h1>
             <p>{{$gallery->description}}</p>
         @endif
 

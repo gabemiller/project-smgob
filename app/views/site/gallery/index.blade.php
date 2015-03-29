@@ -1,14 +1,14 @@
-@extend('_frontend.master')
-
-@section('page-title')
-    <h1>Galériák</h1>
-@stop
+@extends('_frontend.master')
 
 @section('breadcrumb')
     {{ HTML::decode(Breadcrumbs::render('galeriak.index')) }}
 @stop
+
 @section('content')
     <div class="gallery">
+
+        <h1 class="content-title">Galériák</h1>
+
         <ul class="row list-unstyled">
             @foreach($galleries as $gallery)
                 @if(count($gallery->pictures)>0)

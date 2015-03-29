@@ -12,10 +12,6 @@
     {{ HTML::script('//html5shim.googlecode.com/svn/trunk/html5.js'); }}
     <![endif]-->
 
-    {{ HTML::style('http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,latin-ext'); }}
-    {{
-    HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,latin-ext');
-    }}
     {{ HTML::style('css/bootstrap.min.css'); }}
     {{ HTML::style('css/divide.min.css'); }}
 
@@ -27,23 +23,24 @@
 @include('_frontend.header')
 <div class="container main-container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12">
             @yield('breadcrumb')
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="col-md-3">
+            <img class="img-responsive" src="{{URL::to('assets/szm.jpg')}}">
             @yield('sidebar')
             <div class="hidden-xs hidden-sm">
                 <h4>Kövessen Facebookon!</h4>
 
                 <div class="fb-like-box" data-href="https://www.facebook.com/szentmiklosgorkatovodaesbolcsode"
                      data-colorscheme="light"
-                     data-show-faces="true" data-header="false" data-show-border="false" data-width="292"></div>
+                     data-show-faces="true" data-header="false" data-show-border="false" data-width="270"></div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="col-md-9">
             @yield('content')
         </div>
     </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace Divide\CMS;
+use Date;
 
 /**
  * Divide\CMS\Document

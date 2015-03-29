@@ -11,11 +11,11 @@
 @section('content')
 
     @foreach($articles as $article)
-        <div class="article list-box">
-            <h3>{{HTML::link($article->getLink(),$article->title)}}</h3>
+        <div class="item">
+            <h1 class="content-title">{{HTML::link($article->getLink(),$article->title)}}</h1>
 
-            <p class="article-datas">
-                <i class="fa fa-user"></i> {{$article->getAuthorName()}} <i class="fa fa-clock-o"></i>
+            <p class="item-datas">
+                <i class="fa fa-clock-o"></i>
                 {{$article->getCreatedAt() }}
 
                 @if(sizeof($article->tagNames()) > 0)
@@ -24,6 +24,10 @@
                         <span>{{HTML::linkRoute('hirek.tag',$tag->name,array('id'=>$tag->id,'tagSlug'=>\Str::slug($tag->slug)))}}</span>
                     @endforeach
                 @endif
+            </p>
+
+            <p class="item-content">
+                {{$article->getParragraph()}}
             </p>
         </div>
     @endforeach

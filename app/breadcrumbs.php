@@ -10,7 +10,7 @@
  */
 
 Breadcrumbs::register('fooldal', function($breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-home"></i>', route('fooldal'));
+    $breadcrumbs->push('Főoldal', route('fooldal'));
 });
 
 Breadcrumbs::register('hirek.show', function($breadcrumbs,$article) {
@@ -52,6 +52,21 @@ Breadcrumbs::register('galeriak.show', function($breadcrumbs,$gallery) {
 Breadcrumbs::register('oldalak.show', function($breadcrumbs,$page) {
     $breadcrumbs->parent('fooldal');
     $breadcrumbs->push($page->title, route('oldalak.show',$page->id));
+});
+
+
+/**
+ * Dokumentumok
+ */
+
+Breadcrumbs::register('dokumentumok.index', function($breadcrumbs) {
+    $breadcrumbs->parent('fooldal');
+    $breadcrumbs->push('Dokumentumok', route('dokumentumok.index'));
+});
+
+Breadcrumbs::register('dokumentumok.category', function($breadcrumbs,$category) {
+    $breadcrumbs->parent('dokumentumok.index');
+    $breadcrumbs->push($category->name, route('dokumentumok.index',$category->id));
 });
 
 /**

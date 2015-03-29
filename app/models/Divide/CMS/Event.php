@@ -10,10 +10,11 @@ use Date;
  *
  * @property-read \Divide\CMS\Gallery $gallery
  * @property-read \Illuminate\Database\Eloquent\Collection|\Conner\Tagging\Tagged[] $tagged
- * @method static \Divide\CMS\Event withAllTags($tagNames) 
- * @method static \Divide\CMS\Event withAnyTag($tagNames) 
+ * @method static \Divide\CMS\Event withAllTags($tagNames)
+ * @method static \Divide\CMS\Event withAnyTag($tagNames)
  */
-class Event extends \Eloquent {
+class Event extends \Eloquent
+{
 
     use \Conner\Tagging\TaggableTrait;
 
@@ -27,7 +28,8 @@ class Event extends \Eloquent {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function gallery() {
+    public function gallery()
+    {
         return $this->belongsTo('Divide\CMS\Gallery');
     }
 
@@ -35,7 +37,8 @@ class Event extends \Eloquent {
     /**
      * @return int|mixed
      */
-    public function getGalleryId(){
+    public function getGalleryId()
+    {
         return $this->gallery_id == 0 ? 0 : $this->gallery->id;
     }
 
@@ -43,17 +46,20 @@ class Event extends \Eloquent {
     /**
      * @return string
      */
-    public function getLink(){
-        return 'esemenyek/'.$this->id.'/'.Str::slug($this->title);
+    public function getLink()
+    {
+        return 'esemenyek/' . $this->id . '/' . Str::slug($this->title);
     }
 
     /**
-     * @param int $characters
+     * @param int $words
      * @param string $end
      * @return string
+     *
      */
-    public function getParragraph($characters = 500,$end = '...'){
-        return Str::limit(strip_tags($this->content), $characters,$end);
+    public function getParragraph($words = 50, $end = '...')
+    {
+        return Str::words(trim(preg_replace('/<[^>]*>/', ' ', $this->content)), $words, $end);
     }
 
     /**

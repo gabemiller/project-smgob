@@ -3,10 +3,10 @@
 @if(!$item->hasChildren())
 <a href="{{ $item->link->path['url'] }}">{{$item->title }} </a>
 @else
-<a href="{{ $item->link->path['url'] }}" class="dropdown-toggle" data-toggle="dropdown">{{$item->title }} <span class="caret"></span></a>
+<a href="{{ $item->link->path['url'] }}">{{$item->title }} <span class="caret"></span></a>
 @endif
 @if ($item->hasChildren())
-<ul class="dropdown-menu">
+<ul>
     @include('_frontend.menu', array('items' => $item->children()))
 </ul>
 @endif

@@ -6,6 +6,7 @@
             <p>{{Setting::get('site-title')}}<br>
                 © {{date('Y')}} Minden jog fenntartva.
             </p>
+            <a class="divide-bottom-logo" href="http://divide.hu" target="_blank">Divide.hu</a>
         </div>
     </div>
 </footer>

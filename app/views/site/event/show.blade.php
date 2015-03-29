@@ -1,8 +1,4 @@
-@extend('_frontend.master')
-
-@section('page-title')
-<h1>{{HTML::link($event->getLink(),$event->title)}}</h1>
-@stop
+@extends('_frontend.master')
 
 @section('breadcrumb')
 {{ HTML::decode(Breadcrumbs::render('esemenyek.show',$event)) }}
@@ -11,16 +7,19 @@
 
 @section('content')
 
-<div class="event">
-    <div class="event-content">
+<div class="item">
+
+    <h1 class="content-title">{{HTML::link($event->getLink(),$event->title)}}</h1>
+
+    <div class="item-content">
         {{$event->content}}
     </div>
 
-    <div class="event-infos">
+    <div class="item-infos">
         <div class="row">
             <div class="col-xs-12">
-                <div class="event-info"><i class="fa fa-clock-o"></i> {{$event->getStartAt()}} - {{$event->getEndAt()}}</div>
-                <div class="event-info">
+                <div class="item-info"><i class="fa fa-clock-o"></i> {{$event->getStartAt()}} - {{$event->getEndAt()}}</div>
+                <div class="item-info">
                     @if(count($event->tagNames())>0)
                         <i class="fa fa-tags"></i>
                         @foreach(\Divide\Helper\Tag::getTagByName($event->tagNames()) as $tag)
@@ -34,7 +33,7 @@
 
     @if(count($event->gallery)!=0 && count($event->gallery->pictures)!=0)
         <h4>Galéria</h4>
-        <div class="event-gallery">
+        <div class="item-gallery">
             <div class="owl-carousel">
                 @foreach($article->gallery->pictures as $picture)
                     <div>

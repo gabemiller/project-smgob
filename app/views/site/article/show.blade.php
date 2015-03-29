@@ -1,26 +1,23 @@
-@extend('_frontend.master')
-
-@section('page-title')
-    <h1>{{HTML::link($article->getLink(),$article->title)}}</h1>
-@stop
+@extends('_frontend.master')
 
 @section('breadcrumb')
     {{ HTML::decode(Breadcrumbs::render('hirek.show',$article)) }}
 @stop
 
 @section('content')
-    <div class="article">
+    <div class="item">
 
-        <div class="article-content">
+        <h1 class="content-title">{{HTML::link($article->getLink(),$article->title)}}</h1>
+
+        <div class="item-content">
             {{$article->content}}
         </div>
 
-        <div class="article-infos">
+        <div class="item-infos">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="article-info"><i class="fa fa-user"></i> {{$article->getAuthorName()}}</div>
-                    <div class="article-info"><i class="fa fa-clock-o"></i> {{$article->getCreatedAt()}}</div>
-                    <div class="article-info">
+                    <div class="item-info"><i class="fa fa-clock-o"></i> {{$article->getCreatedAt()}}</div>
+                    <div class="item-info">
                         @if(count($article->tagNames())>0)
                             <i class="fa fa-tags"></i>
                             @foreach(\Divide\Helper\Tag::getTagByName($article->tagNames()) as $tag)
@@ -36,7 +33,7 @@
         @if(count($article->gallery)!=0 && count($article->gallery->pictures)!=0)
             <h4>Galéria</h4>
 
-            <div class="article-gallery">
+            <div class="item-gallery">
                 <div class="owl-carousel">
                     @foreach($article->gallery->pictures as $picture)
                         <div>

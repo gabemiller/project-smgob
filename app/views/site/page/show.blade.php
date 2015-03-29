@@ -1,7 +1,4 @@
-@extend('_frontend.master')
-@section('page-title')
-    <h1>{{$page->title}}</h1>
-@stop
+@extends('_frontend.master')
 
 @section('breadcrumb')
     {{ HTML::decode(Breadcrumbs::render('oldalak.show',$page)) }}
@@ -9,6 +6,8 @@
 
 @section('content')
     <div class="page">
+
+        <h1 class="content-title">{{$page->title}}</h1>
 
         <div class="page-content">
             {{$page->content}}

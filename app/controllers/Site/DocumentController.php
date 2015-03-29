@@ -34,11 +34,13 @@ class DocumentController extends \BaseController
 
         } else {
             $doc = Document::all();
+            $cat = null;
         }
 
         $this->layout->content = View::make('site.document.index')
             ->with('documents', $doc)
-            ->with('categories', DocumentCategory::all(['id','name','slug']));
+            ->with('categories', DocumentCategory::all(['id','name','slug']))
+            ->with('category', $cat);
     }
 
 }
