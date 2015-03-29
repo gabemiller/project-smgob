@@ -10,7 +10,7 @@
         <h1 class="content-title">{{$gallery->name}}</h1>
 
         @if($gallery->description)
-            <h2 class="content-subtitle-2">Leírás</h1>
+            <h2 class="content-subtitle-2">Leírás</h2>
             <p>{{$gallery->description}}</p>
         @endif
 
