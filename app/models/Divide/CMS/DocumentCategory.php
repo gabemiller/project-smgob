@@ -58,18 +58,17 @@ class DocumentCategory extends \Eloquent {
     }
 
     /**
-     * @param int $id
      * @return array
      */
-    public static function getCategoriesforPublic() {
+    public static function getArray()
+    {
+        $arr = array();
 
-        $array = array(0 => 'Válasszon kategóriát!');
-
-        foreach (DocumentCategory::all(['id', 'name']) as $docCategory) {
-            $array[$docCategory->id] = $docCategory->name;
+        foreach (static::all(['id', 'name']) as $item) {
+            $arr[$item->id] = $item->title;
         }
 
-        return $array;
+        return $arr;
     }
 
 
