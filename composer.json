@@ -12,10 +12,10 @@
         "lavary/laravel-menu": "dev-master",
         "ryannielson/meta": "1.1.*",
         "philf/setting": "dev-master",
-        "jenssegers/date": "*"
+        "jenssegers/date": "*",
+        "barryvdh/laravel-elfinder": "0.2.*"
     },
     "require-dev": {
-        "itsgoingd/clockwork": "dev-master",
         "way/generators": "2.*",
         "barryvdh/laravel-ide-helper": "1.*"
     },

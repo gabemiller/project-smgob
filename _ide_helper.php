@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.2.11 on 2014-10-15.
+ * Generated for Laravel 4.2.17 on 2015-04-01.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -366,7 +366,7 @@ namespace {
         }
         
         /**
-         * Terminate the request and send the response to the browser.
+         * Call the "finish" and "shutdown" callbacks assigned to the application.
          *
          * @param \Symfony\Component\HttpFoundation\Request $request
          * @param \Symfony\Component\HttpFoundation\Response $response
@@ -1095,7 +1095,7 @@ namespace {
         }
         
         /**
-         * Set an input definition set to be used with this application
+         * Set an input definition set to be used with this application.
          *
          * @param \Symfony\Component\Console\InputDefinition $definition The input definition
          * @api 
@@ -1351,7 +1351,7 @@ namespace {
         }
         
         /**
-         * Tries to figure out the terminal dimensions based on the current environment
+         * Tries to figure out the terminal dimensions based on the current environment.
          *
          * @return array Array containing width and height
          * @static 
@@ -3093,7 +3093,7 @@ namespace {
          *
          * @param string $query
          * @param array $bindings
-         * @param $time
+         * @param float|null $time
          * @return void 
          * @static 
          */
@@ -3705,12 +3705,25 @@ namespace {
          * @param string $operator
          * @param int $count
          * @param string $boolean
-         * @param \Closure $callback
+         * @param \Closure|null $callback
          * @return \Illuminate\Database\Eloquent\Builder|static 
          * @static 
          */
         public static function has($relation, $operator = '>=', $count = 1, $boolean = 'and', $callback = null){
             return \Illuminate\Database\Eloquent\Builder::has($relation, $operator, $count, $boolean, $callback);
+        }
+        
+        /**
+         * Add a relationship count condition to the query.
+         *
+         * @param string $relation
+         * @param string $boolean
+         * @param \Closure|null $callback
+         * @return \Illuminate\Database\Eloquent\Builder|static 
+         * @static 
+         */
+        public static function doesntHave($relation, $boolean = 'and', $callback = null){
+            return \Illuminate\Database\Eloquent\Builder::doesntHave($relation, $boolean, $callback);
         }
         
         /**
@@ -3725,6 +3738,18 @@ namespace {
          */
         public static function whereHas($relation, $callback, $operator = '>=', $count = 1){
             return \Illuminate\Database\Eloquent\Builder::whereHas($relation, $callback, $operator, $count);
+        }
+        
+        /**
+         * Add a relationship count condition to the query with where clauses.
+         *
+         * @param string $relation
+         * @param \Closure|null $callback
+         * @return \Illuminate\Database\Eloquent\Builder|static 
+         * @static 
+         */
+        public static function whereDoesntHave($relation, $callback = null){
+            return \Illuminate\Database\Eloquent\Builder::whereDoesntHave($relation, $callback);
         }
         
         /**
@@ -4228,6 +4253,20 @@ namespace {
         }
         
         /**
+         * Add a "where date" statement to the query.
+         *
+         * @param string $column
+         * @param string $operator
+         * @param int $value
+         * @param string $boolean
+         * @return \Illuminate\Database\Query\Builder|static 
+         * @static 
+         */
+        public static function whereDate($column, $operator, $value, $boolean = 'and'){
+            return \Illuminate\Database\Query\Builder::whereDate($column, $operator, $value, $boolean);
+        }
+        
+        /**
          * Add a "where day" statement to the query.
          *
          * @param string $column
@@ -4284,6 +4323,7 @@ namespace {
         /**
          * Add a "group by" clause to the query.
          *
+         * @param array|string $column,...
          * @return $this 
          * @static 
          */
@@ -4841,6 +4881,16 @@ namespace {
             return \Illuminate\Database\Query\Builder::getGrammar();
         }
         
+        /**
+         * Use the write pdo for query.
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function useWritePdo(){
+            return \Illuminate\Database\Query\Builder::useWritePdo();
+        }
+        
     }
 
 
@@ -5049,11 +5099,12 @@ namespace {
          *
          * @param string $path
          * @param string $contents
+         * @param bool $lock
          * @return int 
          * @static 
          */
-        public static function put($path, $contents){
-            return \Illuminate\Filesystem\Filesystem::put($path, $contents);
+        public static function put($path, $contents, $lock = false){
+            return \Illuminate\Filesystem\Filesystem::put($path, $contents, $lock);
         }
         
         /**
@@ -5113,6 +5164,17 @@ namespace {
          */
         public static function copy($path, $target){
             return \Illuminate\Filesystem\Filesystem::copy($path, $target);
+        }
+        
+        /**
+         * Extract the file name from a file path.
+         *
+         * @param string $path
+         * @return string 
+         * @static 
+         */
+        public static function name($path){
+            return \Illuminate\Filesystem\Filesystem::name($path);
         }
         
         /**
@@ -5468,6 +5530,7 @@ namespace {
          * Create a number input field.
          *
          * @param string $name
+         * @param string|null $value
          * @param array $options
          * @return string 
          * @static 
@@ -5754,6 +5817,17 @@ namespace {
          */
         public static function needsRehash($hashedValue, $options = array()){
             return \Illuminate\Hashing\BcryptHasher::needsRehash($hashedValue, $options);
+        }
+        
+        /**
+         * Set the default crypt cost factor.
+         *
+         * @param int $rounds
+         * @return void 
+         * @static 
+         */
+        public static function setRounds($rounds){
+            \Illuminate\Hashing\BcryptHasher::setRounds($rounds);
         }
         
     }
@@ -6528,7 +6602,7 @@ namespace {
          * Overrides the PHP global variables according to this request instance.
          * 
          * It overrides $_GET, $_POST, $_REQUEST, $_SERVER, $_COOKIE.
-         * $_FILES is never override, see rfc1867
+         * $_FILES is never overridden, see rfc1867
          *
          * @api 
          * @static 
@@ -6642,6 +6716,9 @@ namespace {
          * 
          * Be warned that enabling this feature might lead to CSRF issues in your code.
          * Check that you are using CSRF tokens when required.
+         * If the HTTP method parameter override is enabled, an html-form with method "POST" can be altered
+         * and used to send a "PUT" or "DELETE" request via the _method request parameter.
+         * If these methods are not protected against CSRF, this presents a possible vulnerability.
          * 
          * The HTTP method can only be overridden when the real HTTP method is POST.
          *
@@ -7066,7 +7143,7 @@ namespace {
          *
          * @return string The request method
          * @api 
-         * @see getRealMethod
+         * @see getRealMethod()
          * @static 
          */
         public static function getMethod(){
@@ -7078,7 +7155,7 @@ namespace {
          * Gets the "real" request method.
          *
          * @return string The request method
-         * @see getMethod
+         * @see getMethod()
          * @static 
          */
         public static function getRealMethod(){
@@ -7322,7 +7399,7 @@ namespace {
         }
         
         /**
-         * Gets a list of content types acceptable by the client browser
+         * Gets a list of content types acceptable by the client browser.
          *
          * @return array List of content types in preferable order
          * @api 
@@ -7336,7 +7413,7 @@ namespace {
         /**
          * Returns true if the request is a XMLHttpRequest.
          * 
-         * It works if your JavaScript library set an X-Requested-With HTTP header.
+         * It works if your JavaScript library sets an X-Requested-With HTTP header.
          * It is known to work with common JavaScript frameworks:
          *
          * @link http://en.wikipedia.org/wiki/List_of_Ajax_frameworks#JavaScript
@@ -7684,7 +7761,7 @@ namespace {
          * Register an error_log handler.
          *
          * @param string $level
-         * @param integer $messageType
+         * @param int $messageType
          * @return void 
          * @static 
          */
@@ -8397,7 +8474,7 @@ namespace {
         }
         
         /**
-         * Push a new an array of jobs onto the queue.
+         * Push an array of jobs onto the queue.
          *
          * @param array $jobs
          * @param mixed $data
@@ -9160,7 +9237,7 @@ namespace {
          * Overrides the PHP global variables according to this request instance.
          * 
          * It overrides $_GET, $_POST, $_REQUEST, $_SERVER, $_COOKIE.
-         * $_FILES is never override, see rfc1867
+         * $_FILES is never overridden, see rfc1867
          *
          * @api 
          * @static 
@@ -9274,6 +9351,9 @@ namespace {
          * 
          * Be warned that enabling this feature might lead to CSRF issues in your code.
          * Check that you are using CSRF tokens when required.
+         * If the HTTP method parameter override is enabled, an html-form with method "POST" can be altered
+         * and used to send a "PUT" or "DELETE" request via the _method request parameter.
+         * If these methods are not protected against CSRF, this presents a possible vulnerability.
          * 
          * The HTTP method can only be overridden when the real HTTP method is POST.
          *
@@ -9698,7 +9778,7 @@ namespace {
          *
          * @return string The request method
          * @api 
-         * @see getRealMethod
+         * @see getRealMethod()
          * @static 
          */
         public static function getMethod(){
@@ -9710,7 +9790,7 @@ namespace {
          * Gets the "real" request method.
          *
          * @return string The request method
-         * @see getMethod
+         * @see getMethod()
          * @static 
          */
         public static function getRealMethod(){
@@ -9954,7 +10034,7 @@ namespace {
         }
         
         /**
-         * Gets a list of content types acceptable by the client browser
+         * Gets a list of content types acceptable by the client browser.
          *
          * @return array List of content types in preferable order
          * @api 
@@ -9968,7 +10048,7 @@ namespace {
         /**
          * Returns true if the request is a XMLHttpRequest.
          * 
-         * It works if your JavaScript library set an X-Requested-With HTTP header.
+         * It works if your JavaScript library sets an X-Requested-With HTTP header.
          * It is known to work with common JavaScript frameworks:
          *
          * @link http://en.wikipedia.org/wiki/List_of_Ajax_frameworks#JavaScript
@@ -10837,7 +10917,7 @@ namespace {
         }
         
         /**
-         * Sets the session ID
+         * Sets the session ID.
          *
          * @param string $id
          * @api 
@@ -10887,9 +10967,9 @@ namespace {
          * session and deletes the old session from persistence.
          *
          * @param int $lifetime Sets the cookie lifetime for the session cookie. A null value
-         *                          will leave the system settings unchanged, 0 sets the cookie
-         *                          to expire with browser session. Time is in seconds, and is
-         *                          not a Unix timestamp.
+         *                      will leave the system settings unchanged, 0 sets the cookie
+         *                      to expire with browser session. Time is in seconds, and is
+         *                      not a Unix timestamp.
          * @return bool True if session invalidated, false if error.
          * @api 
          * @static 
@@ -10904,9 +10984,9 @@ namespace {
          *
          * @param bool $destroy Whether to delete the old session or leave it to garbage collection.
          * @param int $lifetime Sets the cookie lifetime for the session cookie. A null value
-         *                          will leave the system settings unchanged, 0 sets the cookie
-         *                          to expire with browser session. Time is in seconds, and is
-         *                          not a Unix timestamp.
+         *                       will leave the system settings unchanged, 0 sets the cookie
+         *                       to expire with browser session. Time is in seconds, and is
+         *                       not a Unix timestamp.
          * @return bool True if session migrated, false if error.
          * @api 
          * @static 
@@ -12900,218 +12980,6 @@ namespace {
          */
         public static function all(){
             return \Lavary\Menu\Menu::all();
-        }
-        
-    }
-
-
-    class Clockwork extends \Clockwork\Support\Laravel\Facade{
-        
-        /**
-         * Add a new data source
-         *
-         * @static 
-         */
-        public static function addDataSource($dataSource){
-            return \Clockwork\Clockwork::addDataSource($dataSource);
-        }
-        
-        /**
-         * Return array of all added data sources
-         *
-         * @static 
-         */
-        public static function getDataSources(){
-            return \Clockwork\Clockwork::getDataSources();
-        }
-        
-        /**
-         * Return the request object
-         *
-         * @static 
-         */
-        public static function getRequest(){
-            return \Clockwork\Clockwork::getRequest();
-        }
-        
-        /**
-         * Set a custom request object
-         *
-         * @static 
-         */
-        public static function setRequest($request){
-            return \Clockwork\Clockwork::setRequest($request);
-        }
-        
-        /**
-         * Add data from all data sources to request
-         *
-         * @static 
-         */
-        public static function resolveRequest(){
-            return \Clockwork\Clockwork::resolveRequest();
-        }
-        
-        /**
-         * Store request via storage object
-         *
-         * @static 
-         */
-        public static function storeRequest(){
-            return \Clockwork\Clockwork::storeRequest();
-        }
-        
-        /**
-         * Return the storage object
-         *
-         * @static 
-         */
-        public static function getStorage(){
-            return \Clockwork\Clockwork::getStorage();
-        }
-        
-        /**
-         * Set a custom storage object
-         *
-         * @static 
-         */
-        public static function setStorage($storage){
-            return \Clockwork\Clockwork::setStorage($storage);
-        }
-        
-        /**
-         * Return the log instance
-         *
-         * @static 
-         */
-        public static function getLog(){
-            return \Clockwork\Clockwork::getLog();
-        }
-        
-        /**
-         * Set a custom log instance
-         *
-         * @static 
-         */
-        public static function setLog($log){
-            return \Clockwork\Clockwork::setLog($log);
-        }
-        
-        /**
-         * Return the timeline instance
-         *
-         * @static 
-         */
-        public static function getTimeline(){
-            return \Clockwork\Clockwork::getTimeline();
-        }
-        
-        /**
-         * Set a custom timeline instance
-         *
-         * @static 
-         */
-        public static function setTimeline($timeline){
-            return \Clockwork\Clockwork::setTimeline($timeline);
-        }
-        
-        /**
-         * Shortcut methods for the current log instance
-         *
-         * @static 
-         */
-        public static function log($level, $message, $context = array()){
-            return \Clockwork\Clockwork::log($level, $message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function emergency($message, $context = array()){
-            return \Clockwork\Clockwork::emergency($message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function alert($message, $context = array()){
-            return \Clockwork\Clockwork::alert($message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function critical($message, $context = array()){
-            return \Clockwork\Clockwork::critical($message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function error($message, $context = array()){
-            return \Clockwork\Clockwork::error($message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function warning($message, $context = array()){
-            return \Clockwork\Clockwork::warning($message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function notice($message, $context = array()){
-            return \Clockwork\Clockwork::notice($message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function info($message, $context = array()){
-            return \Clockwork\Clockwork::info($message, $context);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function debug($message, $context = array()){
-            return \Clockwork\Clockwork::debug($message, $context);
-        }
-        
-        /**
-         * Shortcut methods for the current timeline instance
-         *
-         * @static 
-         */
-        public static function startEvent($name, $description, $time = null){
-            return \Clockwork\Clockwork::startEvent($name, $description, $time);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function endEvent($name){
-            return \Clockwork\Clockwork::endEvent($name);
         }
         
     }

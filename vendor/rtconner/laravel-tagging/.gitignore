@@ -1,7 +1,0 @@
-.project
-.settings
-!empty
-.idea
-.buildpath
-composer.lock
-/vendor

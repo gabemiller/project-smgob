@@ -112,7 +112,6 @@ return array(
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Lavary\Menu\ServiceProvider',
-        'Clockwork\Support\Laravel\ClockworkServiceProvider',
         'Jenssegers\Date\DateServiceProvider',
         'Philf\Setting\SettingServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
@@ -182,7 +181,6 @@ return array(
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
         'Image' => 'Intervention\Image\Facades\Image',
         'Menu' => 'Lavary\Menu\Facade',
-        'Clockwork' => 'Clockwork\Support\Laravel\Facade',
         'Date' => 'Jenssegers\Date\Date',
     ),
 );
