@@ -16,7 +16,7 @@
     "ryannielson/meta": "1.1.*",
     "philf/setting": "dev-master",
     "jenssegers/date": "*",
-    "barryvdh/laravel-elfinder": "0.2.*"
+    "barryvdh/laravel-elfinder": "0.2.0"
   },
   "require-dev": {
     "way/generators": "2.*",
@@ -39,7 +39,6 @@
     ],
     "post-update-cmd": [
       "php artisan clear-compiled",
-      "php artisan ide-helper:generate",
       "php artisan optimize"
     ],
     "post-create-project-cmd": [

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b3236a66b670e3b68c85a1c738a66c8",
+    "hash": "4dee4cf475c1387703d24659977a8bfe",
     "packages": [
         {
             "name": "barryvdh/elfinder-builds",
@@ -710,16 +710,16 @@
         },
         {
             "name": "lavary/laravel-menu",
-            "version": "dev-master",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lavary/laravel-menu.git",
-                "reference": "96417ddf8c3525de55d5bafd50219c63d2e780a6"
+                "reference": "4db19768ed33a4b4de9a3ba3047e66dd3db85663"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/96417ddf8c3525de55d5bafd50219c63d2e780a6",
-                "reference": "96417ddf8c3525de55d5bafd50219c63d2e780a6",
+                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/4db19768ed33a4b4de9a3ba3047e66dd3db85663",
+                "reference": "4db19768ed33a4b4de9a3ba3047e66dd3db85663",
                 "shasum": ""
             },
             "require": {
@@ -748,7 +748,7 @@
             "keywords": [
                 "laravel"
             ],
-            "time": "2015-02-23 21:52:20"
+            "time": "2014-10-11 12:30:04"
         },
         {
             "name": "monolog/monolog",
@@ -2412,7 +2412,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "rtconner/laravel-tagging": 20,
-        "lavary/laravel-menu": 20,
         "philf/setting": 20
     },
     "prefer-stable": false,
